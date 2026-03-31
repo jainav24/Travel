@@ -666,7 +666,7 @@ function HeroDestinations() {
             color: "#fff", border: "none", padding: "16px 44px", borderRadius: 50,
             fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 700,
             letterSpacing: 3, textTransform: "uppercase", cursor: "pointer",
-            boxShadow: "0 10px 30px rgba(249,115,22,0.35)", transition: "all 0.3s",
+            boxShadow: "0 10px 30px rgba(249,115,22,0.35)",
             opacity: fade ? 1 : 0,
             transform: fade ? "translateY(0)" : "translateY(30px)",
             transition: "opacity 0.5s ease, transform 0.5s ease, background 0.3s, transform 0.3s",

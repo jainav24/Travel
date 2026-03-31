@@ -48,47 +48,107 @@ export default function DestinationList() {
       <style>{`
         .destinations-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 20px;
-          max-width: 1200px;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 24px;
+          max-width: 1440px;
           margin: 0 auto;
         }
 
+        @media(max-width: 1100px) {
+          .destinations-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media(max-width: 900px) {
+          .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media(max-width: 600px) {
+          .destinations-grid { grid-template-columns: repeat(1, 1fr); }
+        }
+
         .destination-card {
-          padding: 20px;
+          position: relative;
           border-radius: 16px;
-          background: #fff;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-          transition: all 0.3s ease;
+          overflow: hidden;
+          aspect-ratio: 3/4;
+          background: #333;
+          box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+          transition: all 0.4s ease;
           cursor: pointer;
-          text-align: center;
         }
 
         .destination-card:hover {
           transform: translateY(-5px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+          box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        .destination-card h3 {
-          font-family: 'Montserrat', sans-serif;
-          font-size: 18px;
+        .dest-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.6s ease;
+        }
+
+        .destination-card:hover .dest-img {
+          transform: scale(1.05);
+        }
+
+        .dest-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%, transparent 100%);
+          transition: background 0.4s ease;
+        }
+
+        .destination-card:hover .dest-overlay {
+          background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+        }
+
+        .dest-text-wrapper {
+          position: absolute;
+          bottom: 24px;
+          left: 24px;
+          right: 24px;
+          text-align: left;
+        }
+
+        .dest-name {
+          font-family: 'Cormorant Garamond', serif;
+          font-size: clamp(26px, 2.5vw, 32px);
+          color: #fff;
           font-weight: 700;
-          color: ${COLORS.primary};
-          margin: 0 0 8px 0;
+          margin: 0 0 6px 0;
+          line-height: 1.1;
         }
 
-        .destination-card p {
+        .dest-explore {
           font-family: 'Montserrat', sans-serif;
-          font-size: 14px;
-          color: ${COLORS.muted};
-          margin: 0;
+          font-size: 12px;
+          color: rgba(255,255,255,0.9);
+          font-weight: 600;
+          text-transform: uppercase;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .dest-explore-arrow {
+          transition: transform 0.3s ease;
+          display: inline-block;
+        }
+
+        .destination-card:hover .dest-explore-arrow {
+          transform: translateX(4px);
         }
 
         /* Hero styling consistency */
         .dest-hero {
           position: relative;
-          height: 45vh;
-          min-height: 350px;
+          height: 55vh;
+          min-height: 460px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -103,11 +163,21 @@ export default function DestinationList() {
         <img
           src={stockImages.dubai.hero}
           alt="Destinations"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.8 }}
         />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7))" }} />
+        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }} />
         <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "0 20px" }}>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(36px, 6vw, 64px)", color: "#fff", fontWeight: 800, marginBottom: 16 }}>
+          <div style={{ 
+              fontSize: 12, 
+              letterSpacing: 6, 
+              color: COLORS.secondary, 
+              fontWeight: 700, 
+              textTransform: "uppercase", 
+              marginBottom: 16,
+          }}>
+              ✦ Wanderlust ✦
+          </div>
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(48px, 6vw, 72px)", color: "#fff", fontWeight: 700, marginBottom: 16 }}>
             Explore All Destinations
           </h1>
           <p style={{ color: "rgba(255,255,255,0.8)", fontSize: 16, letterSpacing: 1, textTransform: "uppercase", fontWeight: 600 }}>
@@ -119,18 +189,35 @@ export default function DestinationList() {
       {/* ── GRID ── */}
       <section style={{ padding: "0 5vw 100px" }}>
         <div className="destinations-grid">
-          {destinations.map((item, index) => (
-            <div
-              className="destination-card"
-              key={index}
-              onClick={() => navigate(`/destinations/${item.name.toLowerCase().replace(/\s/g, "-")}`)}
-            >
-              <h3>{item.name}</h3>
-              <p>{item.country}</p>
-            </div>
-          ))}
+          {destinations.map((item, index) => {
+            let slug = item.name.toLowerCase().replace(/\s/g, "-");
+            // Mapping correct stock keys
+            if (slug.includes("emirates") || slug === "uae") slug = "dubai";
+            if (slug.includes("lights")) slug = "northern-lights";
+            
+            const key = slug === "hong-kong" ? "hong-kong" : slug;
+            const imgSrc = stockImages[key]?.card || stockImages[key]?.hero || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
+
+            return (
+              <div
+                className="destination-card"
+                key={index}
+                onClick={() => navigate(`/destinations/${slug}`)}
+              >
+                <img src={imgSrc} alt={item.name} className="dest-img" />
+                <div className="dest-overlay" />
+                <div className="dest-text-wrapper">
+                  <h3 className="dest-name">{item.name}</h3>
+                  <div className="dest-explore">
+                    Explore <span className="dest-explore-arrow">&rarr;</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
     </div>
   );
 }
+

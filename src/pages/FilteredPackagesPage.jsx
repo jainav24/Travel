@@ -197,21 +197,23 @@ export default function FilteredPackagesPage() {
             </p>
           </div>
         ) : (
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: priceRange === "under-50k" ? "1fr" : "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
-            alignItems: "stretch",
-            gap: "24px",
-            maxWidth: priceRange === "under-50k" ? 900 : 1200,
-            margin: "0 auto",
-          }}>
+          <div 
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "32px",
+              maxWidth: 1000,
+              margin: "0 auto",
+              padding: "20px 0 40px",
+            }} 
+          >
             {filteredPackages.map((pkg, i) => (
               <PackageCard
                 key={`${pkg.destinationSlug}-${pkg.slug || pkg.title}-${i}`}
                 pkg={pkg}
                 index={i}
                 destinationSlug={pkg.destinationSlug}
-                variant={priceRange === "under-50k" ? "horizontal" : "grid"}
+                variant="horizontal-split" 
               />
             ))}
           </div>

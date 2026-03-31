@@ -34,112 +34,87 @@ const DestinationGridCard = ({ dest, index, visible }) => {
             onMouseLeave={() => setHovered(false)}
             style={{
                 position: "relative",
-                borderRadius: 24,
+                borderRadius: 16,
                 overflow: "hidden",
-                aspectRatio: "3 / 4",
+                aspectRatio: "3/4",
                 cursor: "pointer",
-                boxShadow: hovered 
-                    ? "0 20px 40px rgba(0,0,0,0.15)"
-                    : "0 10px 25px rgba(0,0,0,0.06)",
-                transform: hovered ? "translateY(-8px)" : "translateY(0)",
+                boxShadow: hovered ? "0 15px 35px rgba(0,0,0,0.2)" : "0 8px 25px rgba(0,0,0,0.08)",
+                transform: hovered ? "translateY(-4px)" : "translateY(0)",
                 opacity: visible ? 1 : 0,
-                transition: "all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)",
-                transitionDelay: `${index * 0.05}s`,
-                background: COLORS.bgAlt2,
+                transition: "all 0.4s ease",
             }}
         >
-            {/* Image with zoom effect */}
             <img
                 src={getDestImage()}
                 alt={dest.name}
                 style={{
+                    position: "absolute",
+                    inset: 0,
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    transform: hovered ? "scale(1.1)" : "scale(1)",
-                    transition: "transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)",
+                    transform: hovered ? "scale(1.05)" : "scale(1)",
+                    transition: "transform 0.6s ease",
+                    display: "block",
                 }}
             />
 
-            {/* Gradient Overlay */}
+            {/* Dark gradient overlay */}
             <div
                 style={{
                     position: "absolute",
                     inset: 0,
                     background: hovered
-                        ? "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)"
-                        : "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)",
+                        ? "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)"
+                        : "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%, transparent 100%)",
                     transition: "background 0.4s ease",
                 }}
             />
 
-            {/* Tag Badge */}
-            {dest.tag && (
-                <div style={{
-                    position: "absolute",
-                    top: 20,
-                    right: 20,
-                    padding: "6px 12px",
-                    borderRadius: 50,
-                    background: "rgba(255,255,255,0.2)",
-                    backdropFilter: "blur(8px)",
-                    color: "#fff",
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: 1,
-                    textTransform: "uppercase",
-                    border: "1px solid rgba(255,255,255,0.3)",
-                    transition: "all 0.3s ease",
-                    transform: hovered ? "translateY(0)" : "translateY(-5px)",
-                    opacity: hovered ? 1 : 0,
-                }}>
-                    {dest.tag}
-                </div>
-            )}
-
-            {/* Content info */}
+            {/* Bottom-left text */}
             <div
                 style={{
                     position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: "32px",
+                    bottom: 24,
+                    left: 24,
+                    right: 24,
                     textAlign: "left",
                 }}
             >
-                <div
-                    style={{
-                        fontFamily: "'Montserrat', sans-serif",
-                        fontSize: 11,
-                        color: "rgba(255,255,255,0.8)",
-                        letterSpacing: 3,
-                        textTransform: "uppercase",
-                        marginBottom: 6,
-                        transform: hovered ? "translateY(0)" : "translateY(5px)",
-                        transition: "all 0.4s ease",
-                    }}
-                >
-                    {dest.country}
-                </div>
                 <h3
                     style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "clamp(24px, 2.5vw, 32px)",
+                        fontSize: "clamp(26px, 2.5vw, 32px)",
                         color: "#fff",
                         fontWeight: 700,
-                        margin: 0,
+                        margin: "0 0 6px 0",
+                        letterSpacing: "0.02em",
                         lineHeight: 1.1,
-                        transform: hovered ? "translateY(0)" : "translateY(5px)",
-                        transition: "all 0.4s ease 0.05s",
                     }}
                 >
                     {dest.name}
                 </h3>
+                
+                <div
+                    style={{
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontSize: 12,
+                        color: "rgba(255,255,255,0.9)",
+                        fontWeight: 600,
+                        letterSpacing: "0.04em",
+                        textTransform: "uppercase",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 6,
+                    }}
+                >
+                    Explore <span style={{ transform: hovered ? "translateX(4px)" : "translateX(0)", transition: "transform 0.3s", display: "inline-block" }}>&rarr;</span>
+                </div>
             </div>
         </div>
     );
 };
+
 
 export default function DestinationsPage() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -162,13 +137,20 @@ export default function DestinationsPage() {
     return (
         <div style={{ background: COLORS.bg, color: COLORS.dark, minHeight: "100vh", paddingBottom: 100 }}>
             
-            {/* ── HEADER ── */}
-            <section style={{ paddingTop: 140, paddingBottom: 60, px: "5vw", textAlign: "center" }}>
-                <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 20px" }}>
+            {/* ── HERO ── */}
+            <section style={{ position: "relative", height: "55vh", minHeight: 460, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 60 }}>
+                <img
+                    src={stockImages.dubai.hero}
+                    alt="All Destinations"
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+                />
+                <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }} />
+                
+                <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "0 20px" }}>
                     <div style={{ 
                         fontSize: 12, 
                         letterSpacing: 6, 
-                        color: COLORS.primary, 
+                        color: COLORS.secondary, 
                         fontWeight: 700, 
                         textTransform: "uppercase", 
                         marginBottom: 16,
@@ -180,30 +162,17 @@ export default function DestinationsPage() {
                     </div>
                     <h1 style={{ 
                         fontFamily: "'Cormorant Garamond', serif", 
-                        fontSize: "clamp(48px, 8vw, 82px)", 
+                        fontSize: "clamp(48px, 6vw, 72px)", 
                         fontWeight: 700, 
                         lineHeight: 1.1, 
-                        marginBottom: 20, 
-                        color: COLORS.dark,
+                        marginBottom: 16, 
+                        color: "#fff",
                         opacity: visible ? 1 : 0,
                         transform: visible ? "translateY(0)" : "translateY(20px)",
                         transition: "all 0.6s ease 0.1s"
                     }}>
-                        Explore All<br /> <em style={{ color: COLORS.primaryLight, fontStyle: "italic" }}>Destinations</em>
+                        Explore All Destinations
                     </h1>
-                    <p style={{ 
-                        fontFamily: "'Montserrat', sans-serif",
-                        fontSize: "clamp(15px, 1.8vw, 18px)", 
-                        color: COLORS.muted, 
-                        maxWidth: 600, 
-                        margin: "0 auto 40px", 
-                        lineHeight: 1.8,
-                        opacity: visible ? 1 : 0,
-                        transform: visible ? "translateY(0)" : "translateY(20px)",
-                        transition: "all 0.6s ease 0.2s"
-                    }}>
-                        Discover handpicked destinations around the world. From the volcanic landscapes of Bali to the futuristic skylines of Dubai.
-                    </p>
                 </div>
             </section>
 
@@ -314,16 +283,14 @@ export default function DestinationsPage() {
 
             {/* Custom Responsive Styles */}
             <style>{`
-                @media(max-width: 1200px) {
-                    .destinations-grid { grid-template-columns: repeat(3, 1fr) !important; }
+                .destinations-grid { 
+                    gap: 24px !important; 
                 }
                 @media(max-width: 900px) {
-                    .destinations-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; }
+                    .destinations-grid { grid-template-columns: repeat(2, 1fr) !important; }
                 }
                 @media(max-width: 600px) {
                     .destinations-grid { grid-template-columns: repeat(1, 1fr) !important; }
-                    section:first-of-type { padding-top: 100px !important; }
-                    h1 { font-size: 42px !important; }
                 }
             `}</style>
 

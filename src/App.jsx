@@ -223,6 +223,7 @@ function Navbar() {
   const isHeroRoute =
     pathname === "/" ||
     pathname === "/about" ||
+    pathname === "/destinations" ||
     pathname.startsWith("/destination/");
 
   // 2. HANDLE INITIAL LOAD CORRECTLY (CRITICAL FIX)
@@ -665,6 +666,7 @@ function Navbar() {
 // ─── HERO DESTINATIONS ───────────────────────────────────────────────────────
 
 function HeroDestinations() {
+  const navigate = useNavigate();
   const [slide, setSlide] = useState(0);
   const [fade, setFade] = useState(true);
 

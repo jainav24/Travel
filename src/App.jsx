@@ -356,42 +356,41 @@ function Navbar() {
                 <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
-            {/* Mega dropdown */}
-            <div style={{
-              position: "fixed", top: NAV_HEIGHT, left: 0, right: 0,
-              background: "#fff",
-              borderBottom: "1px solid rgba(0,0,0,0.08)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-              opacity: destOpen ? 1 : 0,
-              pointerEvents: destOpen ? "auto" : "none",
-              transform: destOpen ? "translateY(0)" : "translateY(-6px)",
-              transition: "opacity 0.2s ease, transform 0.2s ease",
-              zIndex: 300,
-              maxHeight: "60vh", overflowY: "auto",
-            }}>
-              <div style={{
-                display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-                gap: 0, padding: "16px 5vw", maxWidth: 1200, margin: "0 auto",
+            {/* Destinations Dropdown */}
+            {destOpen && (
+              <ul className="destinations-dropdown" style={{
+                position: "absolute", top: "100%", left: 0,
+                background: "#fff",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+                borderRadius: 12,
+                zIndex: 300,
+                listStyle: "none",
+                display: "block",
               }}>
-                {NAV_DESTINATIONS.map(d => (
-                  <button key={d.slug}
-                    onClick={() => { setDestOpen(false); navigate(`/destination/${d.slug}`); }}
-                    style={{
-                      display: "block", width: "100%", padding: "12px 16px",
-                      border: "none", background: "transparent", cursor: "pointer",
-                      fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 500,
-                      color: COLORS.dark, textAlign: "left",
-                      borderRadius: 8, transition: "background 0.15s, color 0.15s",
-                    }}
-                    onMouseOver={e => { e.currentTarget.style.background = COLORS.bgAlt; e.currentTarget.style.color = COLORS.primary; }}
-                    onMouseOut={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = COLORS.dark; }}
+                {[
+                  { name: "Bali", slug: "bali" },
+                  { name: "Thailand", slug: "thailand" },
+                  { name: "Dubai", slug: "dubai" },
+                  { name: "Maldives", slug: "maldives" }
+                ].map((item) => (
+                  <li 
+                    key={item.slug}
+                    onClick={() => { setDestOpen(false); navigate(`/destination/${item.slug}`); }}
+                    style={{ transition: "0.2s" }}
                   >
-                    {d.name}
-                    <span style={{ display: "block", fontSize: 10, color: COLORS.muted, marginTop: 2, letterSpacing: 0.5 }}>{d.country}</span>
-                  </button>
+                    {item.name}
+                  </li>
                 ))}
-              </div>
-            </div>
+                <li 
+                  className="view-all" 
+                  onClick={() => { setDestOpen(false); navigate("/destinations"); }}
+                  style={{ borderTop: "1px solid #eee", marginTop: 4, fontWeight: 700 }}
+                >
+                  View All
+                </li>
+              </ul>
+            )}
+
           </div>
 
           {/* HOLIDAY PACKAGES */}
@@ -413,38 +412,32 @@ function Navbar() {
                 <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
-            {/* Mega dropdown */}
-            <div style={{
-              position: "fixed", top: NAV_HEIGHT, left: 0, right: 0,
-              background: "#fff",
-              borderBottom: "1px solid rgba(0,0,0,0.08)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-              opacity: pkgOpen ? 1 : 0,
-              pointerEvents: pkgOpen ? "auto" : "none",
-              transform: pkgOpen ? "translateY(0)" : "translateY(-6px)",
-              transition: "opacity 0.2s ease, transform 0.2s ease",
-              zIndex: 300,
-            }}>
-              <div style={{ padding: "16px 5vw", maxWidth: 1200, margin: "0 auto" }}>
-                {priceRanges.map(pr => (
-                  <button key={pr.path}
+            {/* Package Dropdown */}
+            {pkgOpen && (
+              <ul className="package-dropdown" style={{
+                position: "absolute", top: "100%", left: 0,
+                background: "#fff",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+                borderRadius: 12,
+                zIndex: 300,
+                listStyle: "none",
+              }}>
+                {[
+                  { label: "Under ₹50K", path: "/packages?price=under-50k" },
+                  { label: "₹50K–₹1L", path: "/packages?price=50k-1l" },
+                  { label: "₹1L–₹1.5L", path: "/packages?price=1l-1.5l" },
+                  { label: "₹1.5L–₹2L", path: "/packages?price=1.5l-2l" }
+                ].map((pr) => (
+                  <li 
+                    key={pr.path}
                     onClick={() => { setPkgOpen(false); navigate(pr.path); }}
-                    style={{
-                      display: "block", width: "100%", padding: "14px 16px",
-                      border: "none", background: "transparent", cursor: "pointer",
-                      fontFamily: "'Montserrat', sans-serif", fontSize: 14, fontWeight: 500,
-                      color: COLORS.dark, textAlign: "left",
-                      borderRadius: 8, transition: "background 0.15s, color 0.15s",
-                      borderBottom: "1px solid rgba(0,0,0,0.04)",
-                    }}
-                    onMouseOver={e => { e.currentTarget.style.background = COLORS.bgAlt; e.currentTarget.style.color = COLORS.primary; }}
-                    onMouseOut={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = COLORS.dark; }}
                   >
                     {pr.label}
-                  </button>
+                  </li>
                 ))}
-              </div>
-            </div>
+              </ul>
+            )}
+
           </div>
 
           {/* ABOUT US */}
@@ -540,7 +533,51 @@ function Navbar() {
         @media(max-width:900px){ .navbar-search { max-width: 200px !important; } }
         @media(max-width:768px){ .navbar-search { max-width: none!important; margin: 0 8px!important; } .navbar-search input { font-size: 12px!important; } .nav-search-placeholder { font-size: 11px!important; } }
         .nav-link-hover:hover { color: ${COLORS.secondary} !important; }
+
+        /* Destinations Dropdown */
+        .destinations-dropdown {
+          padding: 8px 12px;
+          min-width: 160px;
+        }
+
+        .destinations-dropdown li {
+          padding: 6px 10px;
+          font-size: 14px;
+          color: ${COLORS.dark};
+          cursor: pointer;
+        }
+
+        .destinations-dropdown li:hover {
+          background: #f5f5f5;
+          color: ${COLORS.secondary} !important;
+        }
+
+        /* Package Dropdown */
+        .package-dropdown {
+          display: flex;
+          gap: 8px;
+          padding: 10px;
+          max-width: 300px;
+          flex-wrap: wrap;
+        }
+
+        .package-dropdown li {
+          padding: 6px 12px;
+          border-radius: 20px;
+          background: #f5f5f5;
+          font-size: 13px;
+          white-space: nowrap;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          color: ${COLORS.dark};
+        }
+
+        .package-dropdown li:hover {
+          background: #ff7a00;
+          color: white !important;
+        }
       `}</style>
+
     </nav>
   );
 }

@@ -400,7 +400,7 @@ function Navbar() {
       </div>
 
       {/* ─── MEGA DROPDOWN PANELS ─── */}
-      
+
       {/* DESTINATIONS MEGA DROPDOWN */}
       <AnimatePresence>
         {destOpen && (
@@ -424,25 +424,25 @@ function Navbar() {
           >
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}>
               {[
-                { 
-                  title: "Popular Destinations", 
-                  items: [NAV_DESTINATIONS[0], NAV_DESTINATIONS[1], NAV_DESTINATIONS[2], NAV_DESTINATIONS[3]] 
+                {
+                  title: "Popular Destinations",
+                  items: [NAV_DESTINATIONS[0], NAV_DESTINATIONS[1], NAV_DESTINATIONS[2], NAV_DESTINATIONS[3]]
                 },
-                { 
-                  title: "Adventure & Nature", 
-                  items: [NAV_DESTINATIONS[4], NAV_DESTINATIONS[6], NAV_DESTINATIONS[7], NAV_DESTINATIONS[5]] 
+                {
+                  title: "Adventure & Nature",
+                  items: [NAV_DESTINATIONS[4], NAV_DESTINATIONS[6], NAV_DESTINATIONS[7], NAV_DESTINATIONS[5]]
                 },
-                { 
-                  title: "Luxury & Culture", 
-                  items: [NAV_DESTINATIONS[8], NAV_DESTINATIONS[9], NAV_DESTINATIONS[10], NAV_DESTINATIONS[11]] 
+                {
+                  title: "Luxury & Culture",
+                  items: [NAV_DESTINATIONS[8], NAV_DESTINATIONS[9], NAV_DESTINATIONS[10], NAV_DESTINATIONS[11]]
                 }
               ].map((col, idx) => (
-                <div key={idx} style={{ 
+                <div key={idx} style={{
                   padding: "0 40px",
                   borderRight: idx < 2 ? "1px solid rgba(0,0,0,0.06)" : "none"
                 }}>
-                  <h4 style={{ 
-                    fontSize: 10, letterSpacing: 2, color: COLORS.muted, fontWeight: 700, 
+                  <h4 style={{
+                    fontSize: 10, letterSpacing: 2, color: COLORS.muted, fontWeight: 700,
                     textTransform: "uppercase", marginBottom: 24, opacity: 0.8
                   }}>
                     {col.title}
@@ -468,16 +468,16 @@ function Navbar() {
                 </div>
               ))}
             </div>
-            
+
             {/* View All System — BOTTOM RIGHT corner */}
-            <div style={{ 
+            <div style={{
               marginTop: 40, paddingTop: 24, borderTop: "1px solid rgba(0,0,0,0.06)",
               display: "flex", justifyContent: "flex-end"
             }}>
-              <Link 
-                to="/destinations" 
+              <Link
+                to="/destinations"
                 onClick={() => setDestOpen(false)}
-                style={{ 
+                style={{
                   color: COLORS.secondary, fontWeight: 700, fontSize: 13, textDecoration: "none",
                   fontFamily: "'Montserrat', sans-serif", textTransform: "uppercase", letterSpacing: 2,
                   display: "flex", alignItems: "center", gap: 8,
@@ -518,12 +518,12 @@ function Navbar() {
                 { title: "Domestic Escapes", items: priceRanges.slice(0, 2) },
                 { title: "International Luxury", items: priceRanges.slice(2, 5) }
               ].map((col, idx) => (
-                <div key={idx} style={{ 
+                <div key={idx} style={{
                   padding: "0 40px",
                   borderRight: idx < 1 ? "1px solid rgba(0,0,0,0.06)" : "none"
                 }}>
-                  <h4 style={{ 
-                    fontSize: 10, letterSpacing: 2, color: COLORS.muted, fontWeight: 700, 
+                  <h4 style={{
+                    fontSize: 10, letterSpacing: 2, color: COLORS.muted, fontWeight: 700,
                     textTransform: "uppercase", marginBottom: 24, opacity: 0.8
                   }}>
                     {col.title}
@@ -598,9 +598,9 @@ function Navbar() {
                 ))}
                 <Link to="/destinations"
                   onClick={() => setMenuOpen(false)}
-                  style={{ 
+                  style={{
                     marginTop: 10, padding: "12px", textAlign: "center", borderRadius: 12,
-                    background: `rgba(249,115,22,0.1)`, color: COLORS.secondary, fontSize: 12, 
+                    background: `rgba(249,115,22,0.1)`, color: COLORS.secondary, fontSize: 12,
                     fontWeight: 700, textDecoration: "none", fontFamily: "'Montserrat', sans-serif",
                     textTransform: "uppercase", letterSpacing: 1
                   }}
@@ -704,12 +704,12 @@ function HeroDestinations() {
         textAlign: "left", padding: "0 8vw",
       }}>
         <div style={{
-          fontSize: 11, 
-          letterSpacing: 10, 
+          fontSize: 11,
+          letterSpacing: 10,
           color: COLORS.secondary,
-          fontFamily: "'Montserrat', sans-serif", 
+          fontFamily: "'Montserrat', sans-serif",
           fontWeight: 800,
-          marginBottom: 18, 
+          marginBottom: 18,
           textTransform: "uppercase",
           opacity: fade ? 1 : 0,
           transform: fade ? "translateY(0)" : "translateY(30px)",
@@ -718,13 +718,13 @@ function HeroDestinations() {
         }}>
           ✦ {d.country} ✦
         </div>
- 
+
         <h1 style={{
           fontFamily: "'Cormorant Garamond', serif",
-          fontSize: "clamp(64px, 11vw, 150px)", 
+          fontSize: "clamp(64px, 11vw, 150px)",
           color: "#fff",
-          lineHeight: 0.9, 
-          fontWeight: 600, 
+          lineHeight: 0.9,
+          fontWeight: 600,
           letterSpacing: "-0.03em",
           marginBottom: 16,
           textShadow: "0 0 60px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.4)",
@@ -735,12 +735,12 @@ function HeroDestinations() {
         }}>
           {d.name}
         </h1>
- 
+
         <p style={{
           fontFamily: "'Montserrat', sans-serif",
-          fontSize: "clamp(14px, 1.7vw, 18px)", 
+          fontSize: "clamp(14px, 1.7vw, 18px)",
           color: "rgba(255,255,255,0.75)",
-          maxWidth: 480, 
+          maxWidth: 480,
           lineHeight: 1.8,
           opacity: fade ? 1 : 0,
           transform: fade ? "translateY(0)" : "translateY(30px)",
@@ -1420,12 +1420,61 @@ function HomePage() {
 
 // ─── SPLASH LOADER ──────────────────────────────────────────────────────────
 
+function TypographyReveal() {
+  const words = ["WE", "PLAN", "YOU", "EXPLORE"];
+  // Track global char index for stagger delay across all words
+  let charIndex = 0;
+  const wordData = words.map((word) => {
+    const chars = word.split("").map((char) => {
+      const idx = charIndex++;
+      return { char, idx };
+    });
+    return { chars };
+  });
+
+  const BASE_DELAY = 0.25;    // seconds before first char starts
+  const CHAR_STAGGER = 0.06; // seconds between each character
+  const ANIM_DURATION = 0.9; // duration of each char's animation
+
+  return (
+    <div style={{
+      fontFamily: "'Playfair Display', serif",
+      fontSize: "clamp(20px, 4.5vw, 28px)",
+      color: "#1a1a2e",
+      fontWeight: 700,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "flex-end",
+      gap: "20px",
+    }}>
+      {wordData.map(({ chars }, wi) => (
+        <div key={wi} style={{ display: "flex", overflow: "hidden", paddingBottom: 5 }}>
+          {chars.map(({ char, idx }) => (
+            <div key={idx} style={{ overflow: "hidden" }}>
+              <span style={{
+                display: "inline-block",
+                animation: `charReveal ${ANIM_DURATION}s cubic-bezier(0.22, 1, 0.36, 1) both`,
+                animationDelay: `${BASE_DELAY + idx * CHAR_STAGGER}s`,
+                letterSpacing: wi === 3 ? "4px" : "3px",
+              }}>
+                {char}
+              </span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function SplashLoader({ onFinish }) {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setFadeOut(true), 1800);
-    const finish = setTimeout(() => onFinish(), 2300);
+    // 16 total chars, last starts at 0.25 + 15*0.06 = 1.15s + 0.9s duration = ~2.05s
+    // Fade after 3.2s to let it breathe, finish at 3.7s
+    const timer = setTimeout(() => setFadeOut(true), 3200);
+    const finish = setTimeout(() => onFinish(), 3700);
     return () => { clearTimeout(timer); clearTimeout(finish); };
   }, [onFinish]);
 
@@ -1436,58 +1485,47 @@ function SplashLoader({ onFinish }) {
       display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
       opacity: fadeOut ? 0 : 1,
-      transition: "opacity 0.5s ease-out",
+      transition: "opacity 0.6s ease-out",
       pointerEvents: fadeOut ? "none" : "auto",
     }}>
-      {/* Decorative circles */}
+      {/* Decorative rings */}
       <div style={{
         position: "absolute", width: 300, height: 300, borderRadius: "50%",
         border: "1px solid rgba(30,58,138,0.1)",
         animation: "loaderRing 3s linear infinite",
       }} />
       <div style={{
-        position: "absolute", width: 400, height: 400, borderRadius: "50%",
+        position: "absolute", width: 420, height: 420, borderRadius: "50%",
         border: "1px solid rgba(30,58,138,0.05)",
-        animation: "loaderRing 4s linear infinite reverse",
+        animation: "loaderRing 5s linear infinite reverse",
       }} />
 
       {/* Flipping logo */}
       <div style={{
         width: 100, height: 100,
-        animation: "logoFlip 1.6s ease-in-out infinite",
+        animation: "logoFlip 1.8s ease-in-out infinite",
         perspective: 800,
-        marginBottom: 32,
+        marginBottom: 36,
       }}>
         <img src={logo} alt="We Plan Trips" style={{
           width: "100%", height: "100%", objectFit: "contain",
-          filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.3))",
+          filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.22))",
         }} />
       </div>
 
-      {/* Brand text */}
-      <div style={{
-        fontFamily: "'Playfair Display', serif",
-        fontSize: "clamp(16px, 4vw, 22px)",
-        color: "#1a1a2e",
-        letterSpacing: 8,
-        fontWeight: 700,
-        textAlign: "center",
-        opacity: 0,
-        animation: "loaderTextIn 0.8s ease-out 0.4s forwards",
-      }}>
-        WE PLAN YOU EXPLORE
-      </div>
+      {/* Letter-by-letter cinematic typography */}
+      <TypographyReveal />
 
-      {/* Subtle loading bar */}
+      {/* Thin progress bar */}
       <div style={{
-        width: 120, height: 3, borderRadius: 3,
-        background: "rgba(30,58,138,0.05)",
+        width: 120, height: 2, borderRadius: 2,
+        background: "rgba(30,58,138,0.06)",
         marginTop: 28, overflow: "hidden",
       }}>
         <div style={{
-          height: "100%", borderRadius: 3,
+          height: "100%", borderRadius: 2,
           background: "linear-gradient(90deg, #F97316, #FB923C)",
-          animation: "loaderBar 1.8s ease-in-out forwards",
+          animation: "loaderBar 3.0s cubic-bezier(0.4, 0, 0.2, 1) forwards",
         }} />
       </div>
 
@@ -1497,9 +1535,10 @@ function SplashLoader({ onFinish }) {
           50%  { transform: perspective(800px) rotateY(180deg); }
           100% { transform: perspective(800px) rotateY(360deg); }
         }
-        @keyframes loaderTextIn {
-          from { opacity: 0; transform: translateY(12px); letter-spacing: 14px; }
-          to   { opacity: 1; transform: translateY(0); letter-spacing: 8px; }
+        @keyframes charReveal {
+          0%   { transform: translateY(105%) skewY(8deg); opacity: 0; }
+          60%  { opacity: 1; }
+          100% { transform: translateY(0%) skewY(0deg); opacity: 1; }
         }
         @keyframes loaderBar {
           0%   { width: 0%; }

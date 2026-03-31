@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import logo from "./assets/logo.png";
 import whiteLogo from "./assets/White logo.png";
-import { BrowserRouter, Routes, Route, Link, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, Link, useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { ChevronDown, Search, MapPin, Calendar, Clock, DollarSign, Star, Info, CheckCircle2, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import DestinationCarousel from "./components/DestinationCarousel";
 import TravelGalleryBars from "./components/TravelGalleryBars";
 import DestinationPage from "./pages/DestinationPage";
@@ -337,11 +339,11 @@ function Navbar() {
         {/* Desktop Links with Dropdowns */}
         <div style={{ display: "flex", gap: 28, alignItems: "center", flexShrink: 0 }} className="desktop-nav">
 
-          {/* DESTINATIONS */}
+          {/* DESTINATIONS TRIGGER */}
           <div
             onMouseEnter={() => { clearTimeout(destTimeout.current); setDestOpen(true); }}
             onMouseLeave={() => { destTimeout.current = setTimeout(() => setDestOpen(false), 180); }}
-            style={{ position: "relative" }}
+            style={{ position: "static" }}
           >
             <Link to="/destinations" className="nav-link-hover" style={{
               color: destOpen ? COLORS.secondary : baseLinkColor,
@@ -356,48 +358,13 @@ function Navbar() {
                 <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
-            {/* Destinations Dropdown */}
-            {destOpen && (
-              <ul className="destinations-dropdown" style={{
-                position: "absolute", top: "100%", left: 0,
-                background: "#fff",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-                borderRadius: 12,
-                zIndex: 300,
-                listStyle: "none",
-                display: "block",
-              }}>
-                {[
-                  { name: "Bali", slug: "bali" },
-                  { name: "Thailand", slug: "thailand" },
-                  { name: "Dubai", slug: "dubai" },
-                  { name: "Maldives", slug: "maldives" }
-                ].map((item) => (
-                  <li 
-                    key={item.slug}
-                    onClick={() => { setDestOpen(false); navigate(`/destination/${item.slug}`); }}
-                    style={{ transition: "0.2s" }}
-                  >
-                    {item.name}
-                  </li>
-                ))}
-                <li 
-                  className="view-all" 
-                  onClick={() => { setDestOpen(false); navigate("/destinations"); }}
-                  style={{ borderTop: "1px solid #eee", marginTop: 4, fontWeight: 700 }}
-                >
-                  View All
-                </li>
-              </ul>
-            )}
-
           </div>
 
-          {/* HOLIDAY PACKAGES */}
+          {/* HOLIDAY PACKAGES TRIGGER */}
           <div
             onMouseEnter={() => { clearTimeout(pkgTimeout.current); setPkgOpen(true); }}
             onMouseLeave={() => { pkgTimeout.current = setTimeout(() => setPkgOpen(false), 180); }}
-            style={{ position: "relative" }}
+            style={{ position: "static" }}
           >
             <span className="nav-link-hover" style={{
               color: pkgOpen ? COLORS.secondary : baseLinkColor,
@@ -412,35 +379,8 @@ function Navbar() {
                 <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
-            {/* Package Dropdown */}
-            {pkgOpen && (
-              <ul className="package-dropdown" style={{
-                position: "absolute", top: "100%", left: 0,
-                background: "#fff",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-                borderRadius: 12,
-                zIndex: 300,
-                listStyle: "none",
-              }}>
-                {[
-                  { label: "Under ₹50K", path: "/packages?price=under-50k" },
-                  { label: "₹50K–₹1L", path: "/packages?price=50k-1l" },
-                  { label: "₹1L–₹1.5L", path: "/packages?price=1l-1.5l" },
-                  { label: "₹1.5L–₹2L", path: "/packages?price=1.5l-2l" }
-                ].map((pr) => (
-                  <li 
-                    key={pr.path}
-                    onClick={() => { setPkgOpen(false); navigate(pr.path); }}
-                  >
-                    {pr.label}
-                  </li>
-                ))}
-              </ul>
-            )}
-
           </div>
 
-          {/* ABOUT US */}
           <Link to="/about" className="nav-link-hover" style={{
             color: baseLinkColor,
             textDecoration: "none", fontSize: 12, letterSpacing: 2,
@@ -448,8 +388,8 @@ function Navbar() {
             transition: "color 0.3s", textTransform: "uppercase",
             whiteSpace: "nowrap",
           }}>About Us</Link>
-
         </div>
+
         {/* Hamburger */}
         <button onClick={() => setMenuOpen(!menuOpen)} style={{
           display: "none", background: "none", border: "none",
@@ -457,6 +397,160 @@ function Navbar() {
           transition: "color 0.3s", flexShrink: 0,
         }} className="hamburger">☰</button>
       </div>
+
+      {/* ─── MEGA DROPDOWN PANELS ─── */}
+      
+      {/* DESTINATIONS MEGA DROPDOWN */}
+      <AnimatePresence>
+        {destOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
+            onMouseEnter={() => { clearTimeout(destTimeout.current); setDestOpen(true); }}
+            onMouseLeave={() => { destTimeout.current = setTimeout(() => setDestOpen(false), 200); }}
+            style={{
+              position: "absolute", top: NAV_HEIGHT, left: "5%", right: "5%",
+              maxWidth: 1100, margin: "0 auto",
+              background: "#fff",
+              boxShadow: "0 25px 50px -12px rgba(0,0,0,0.12)",
+              borderRadius: 20,
+              zIndex: 300,
+              padding: "40px",
+              border: "1px solid rgba(0,0,0,0.04)",
+            }}
+          >
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}>
+              {[
+                { 
+                  title: "Popular Destinations", 
+                  items: [NAV_DESTINATIONS[0], NAV_DESTINATIONS[1], NAV_DESTINATIONS[2], NAV_DESTINATIONS[3]] 
+                },
+                { 
+                  title: "Adventure & Nature", 
+                  items: [NAV_DESTINATIONS[4], NAV_DESTINATIONS[6], NAV_DESTINATIONS[7], NAV_DESTINATIONS[5]] 
+                },
+                { 
+                  title: "Luxury & Culture", 
+                  items: [NAV_DESTINATIONS[8], NAV_DESTINATIONS[9], NAV_DESTINATIONS[10], NAV_DESTINATIONS[11]] 
+                }
+              ].map((col, idx) => (
+                <div key={idx} style={{ 
+                  padding: "0 40px",
+                  borderRight: idx < 2 ? "1px solid rgba(0,0,0,0.06)" : "none"
+                }}>
+                  <h4 style={{ 
+                    fontSize: 10, letterSpacing: 2, color: COLORS.muted, fontWeight: 700, 
+                    textTransform: "uppercase", marginBottom: 24, opacity: 0.8
+                  }}>
+                    {col.title}
+                  </h4>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    {col.items.map((item) => (
+                      <Link
+                        key={item.slug}
+                        to={`/destination/${item.slug}`}
+                        onClick={() => setDestOpen(false)}
+                        className="mega-nav-link-premium"
+                        style={{
+                          color: COLORS.dark, textDecoration: "none", fontSize: 14,
+                          fontFamily: "'Montserrat', sans-serif", fontWeight: 500,
+                          transition: "all 0.2s", display: "block",
+                          padding: "4px 0"
+                        }}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* View All System — BOTTOM RIGHT corner */}
+            <div style={{ 
+              marginTop: 40, paddingTop: 24, borderTop: "1px solid rgba(0,0,0,0.06)",
+              display: "flex", justifyContent: "flex-end"
+            }}>
+              <Link 
+                to="/destinations" 
+                onClick={() => setDestOpen(false)}
+                style={{ 
+                  color: COLORS.secondary, fontWeight: 700, fontSize: 13, textDecoration: "none",
+                  fontFamily: "'Montserrat', sans-serif", textTransform: "uppercase", letterSpacing: 2,
+                  display: "flex", alignItems: "center", gap: 8,
+                  transition: "all 0.3s"
+                }}
+                className="view-all-link-premium"
+              >
+                View All Destinations <span style={{ fontSize: 18 }}>→</span>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* HOLIDAY PACKAGES MEGA DROPDOWN */}
+      <AnimatePresence>
+        {pkgOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
+            onMouseEnter={() => { clearTimeout(pkgTimeout.current); setPkgOpen(true); }}
+            onMouseLeave={() => { pkgTimeout.current = setTimeout(() => setPkgOpen(false), 200); }}
+            style={{
+              position: "absolute", top: NAV_HEIGHT, left: "5%", right: "5%",
+              maxWidth: 1100, margin: "0 auto",
+              background: "#fff",
+              boxShadow: "0 25px 50px -12px rgba(0,0,0,0.12)",
+              borderRadius: 20,
+              zIndex: 300,
+              padding: "40px",
+              border: "1px solid rgba(0,0,0,0.04)",
+            }}
+          >
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 0 }}>
+              {[
+                { title: "Domestic Escapes", items: priceRanges.slice(0, 2) },
+                { title: "International Luxury", items: priceRanges.slice(2, 5) }
+              ].map((col, idx) => (
+                <div key={idx} style={{ 
+                  padding: "0 40px",
+                  borderRight: idx < 1 ? "1px solid rgba(0,0,0,0.06)" : "none"
+                }}>
+                  <h4 style={{ 
+                    fontSize: 10, letterSpacing: 2, color: COLORS.muted, fontWeight: 700, 
+                    textTransform: "uppercase", marginBottom: 24, opacity: 0.8
+                  }}>
+                    {col.title}
+                  </h4>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    {col.items.map((pr) => (
+                      <Link
+                        key={pr.path}
+                        to={pr.path}
+                        onClick={() => setPkgOpen(false)}
+                        className="mega-nav-link-premium"
+                        style={{
+                          color: COLORS.dark, textDecoration: "none", fontSize: 14,
+                          fontFamily: "'Montserrat', sans-serif", fontWeight: 500,
+                          transition: "all 0.2s", display: "block",
+                          padding: "4px 0"
+                        }}
+                      >
+                        {pr.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Menu */}
       {menuOpen && (
@@ -466,33 +560,53 @@ function Navbar() {
           borderRadius: "0 0 16px 16px",
           boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
           maxWidth: 1400, margin: "0 auto",
+          position: "absolute", top: "100%", left: 0, right: 0,
+          zIndex: 100,
         }}>
           {/* Destinations accordion */}
-          <button onClick={() => setMobileDestOpen(!mobileDestOpen)} style={{
-            display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%",
-            color: COLORS.primary, padding: "14px 24px", border: "none", background: "transparent",
-            fontSize: 14, letterSpacing: 2, fontFamily: "'Montserrat', sans-serif", fontWeight: 600,
-            textTransform: "uppercase", cursor: "pointer",
-          }}>
-            <span>Destinations</span>
-            <svg width="12" height="12" viewBox="0 0 10 10" fill="none" style={{ transition: "transform 0.3s", transform: mobileDestOpen ? "rotate(180deg)" : "rotate(0)" }}>
-              <path d="M2 4L5 7L8 4" stroke={COLORS.primary} strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
-          {mobileDestOpen && (
-            <div style={{ padding: "0 24px 8px 36px" }}>
-              <Link to="/destinations"
-                onClick={() => setMenuOpen(false)}
-                style={{ display: "block", padding: "8px 0", color: COLORS.secondary, fontSize: 13, fontWeight: 700, textDecoration: "none", fontFamily: "'Montserrat', sans-serif" }}
-              >View All Destinations →</Link>
-              {NAV_DESTINATIONS.map(d => (
-                <a key={d.slug} href={`/destination/${d.slug}`}
+          <div style={{ borderBottom: `1px solid rgba(0,0,0,0.05)` }}>
+            <button onClick={() => setMobileDestOpen(!mobileDestOpen)} style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%",
+              color: COLORS.primary, padding: "18px 24px", border: "none", background: "transparent",
+              fontSize: 13, letterSpacing: 2, fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
+              textTransform: "uppercase", cursor: "pointer",
+            }}>
+              <span>Destinations</span>
+              <svg width="12" height="12" viewBox="0 0 10 10" fill="none" style={{ transition: "transform 0.3s", transform: mobileDestOpen ? "rotate(180deg)" : "rotate(0)" }}>
+                <path d="M2 4L5 7L8 4" stroke={COLORS.primary} strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </button>
+            {mobileDestOpen && (
+              <div style={{ padding: "0 24px 20px 24px", display: "flex", flexDirection: "column", gap: 16 }}>
+                {[
+                  { title: "Popular", items: NAV_DESTINATIONS.slice(0, 4) },
+                  { title: "Adventure", items: [NAV_DESTINATIONS[4], NAV_DESTINATIONS[6], NAV_DESTINATIONS[7], NAV_DESTINATIONS[5]] },
+                  { title: "Luxury", items: NAV_DESTINATIONS.slice(8, 12) }
+                ].map((group) => (
+                  <div key={group.title}>
+                    <div style={{ fontSize: 10, fontWeight: 700, color: COLORS.muted, textTransform: "uppercase", letterSpacing: 2, marginBottom: 12 }}>{group.title}</div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 10, paddingLeft: 10 }}>
+                      {group.items.map(d => (
+                        <Link key={d.slug} to={`/destination/${d.slug}`}
+                          onClick={() => setMenuOpen(false)}
+                          style={{ color: COLORS.dark, fontSize: 14, textDecoration: "none", fontFamily: "'Montserrat', sans-serif", fontWeight: 500 }}
+                        >{d.name}</Link>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <Link to="/destinations"
                   onClick={() => setMenuOpen(false)}
-                  style={{ display: "block", padding: "8px 0", color: COLORS.muted, fontSize: 13, textDecoration: "none", fontFamily: "'Montserrat', sans-serif" }}
-                >{d.name}</a>
-              ))}
-            </div>
-          )}
+                  style={{ 
+                    marginTop: 10, padding: "12px", textAlign: "center", borderRadius: 12,
+                    background: `rgba(249,115,22,0.1)`, color: COLORS.secondary, fontSize: 12, 
+                    fontWeight: 700, textDecoration: "none", fontFamily: "'Montserrat', sans-serif",
+                    textTransform: "uppercase", letterSpacing: 1
+                  }}
+                >Explore All Destinations →</Link>
+              </div>
+            )}
+          </div>
 
           {/* Holiday Packages accordion */}
           <button onClick={() => setMobilePkgOpen(!mobilePkgOpen)} style={{
@@ -518,12 +632,12 @@ function Navbar() {
           )}
 
           {/* About Us */}
-          <a href="/about" onClick={() => setMenuOpen(false)} style={{
+          <Link to="/about" onClick={() => setMenuOpen(false)} style={{
             display: "block", color: COLORS.primary, padding: "14px 24px",
             textDecoration: "none", fontSize: 14, letterSpacing: 2,
             fontFamily: "'Montserrat', sans-serif", fontWeight: 600,
             textTransform: "uppercase",
-          }}>About Us</a>
+          }}>About Us</Link>
         </div>
       )}
 
@@ -533,49 +647,15 @@ function Navbar() {
         @media(max-width:900px){ .navbar-search { max-width: 200px !important; } }
         @media(max-width:768px){ .navbar-search { max-width: none!important; margin: 0 8px!important; } .navbar-search input { font-size: 12px!important; } .nav-search-placeholder { font-size: 11px!important; } }
         .nav-link-hover:hover { color: ${COLORS.secondary} !important; }
-
-        /* Destinations Dropdown */
-        .destinations-dropdown {
-          padding: 8px 12px;
-          min-width: 160px;
+        .mega-nav-link-premium { color: ${COLORS.dark}; transition: 0.2s; }
+        .mega-nav-link-premium:hover { 
+          color: ${COLORS.secondary} !important; 
+          transform: translateX(4px); 
+          background: rgba(249,115,22,0.03);
+          border-radius: 6px;
+          padding-left: 8px !important;
         }
-
-        .destinations-dropdown li {
-          padding: 6px 10px;
-          font-size: 14px;
-          color: ${COLORS.dark};
-          cursor: pointer;
-        }
-
-        .destinations-dropdown li:hover {
-          background: #f5f5f5;
-          color: ${COLORS.secondary} !important;
-        }
-
-        /* Package Dropdown */
-        .package-dropdown {
-          display: flex;
-          gap: 8px;
-          padding: 10px;
-          max-width: 300px;
-          flex-wrap: wrap;
-        }
-
-        .package-dropdown li {
-          padding: 6px 12px;
-          border-radius: 20px;
-          background: #f5f5f5;
-          font-size: 13px;
-          white-space: nowrap;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          color: ${COLORS.dark};
-        }
-
-        .package-dropdown li:hover {
-          background: #ff7a00;
-          color: white !important;
-        }
+        .view-all-link-premium:hover { transform: translateX(8px); opacity: 0.8; }
       `}</style>
 
     </nav>
@@ -622,39 +702,50 @@ function HeroDestinations() {
         textAlign: "left", padding: "0 8vw",
       }}>
         <div style={{
-          fontSize: 12, letterSpacing: 6, color: COLORS.secondary,
-          fontFamily: "'Montserrat', sans-serif", fontWeight: 700,
-          marginBottom: 14, textTransform: "uppercase",
+          fontSize: 11, 
+          letterSpacing: 10, 
+          color: COLORS.secondary,
+          fontFamily: "'Montserrat', sans-serif", 
+          fontWeight: 800,
+          marginBottom: 18, 
+          textTransform: "uppercase",
           opacity: fade ? 1 : 0,
           transform: fade ? "translateY(0)" : "translateY(30px)",
-          transition: "opacity 0.5s ease, transform 0.5s ease",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
           transitionDelay: "0.1s",
         }}>
           ✦ {d.country} ✦
         </div>
-
+ 
         <h1 style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: "clamp(52px, 9vw, 120px)", color: "#fff",
-          lineHeight: 0.95, fontWeight: 700, marginBottom: 16,
-          textShadow: "0 4px 30px rgba(0,0,0,0.35)",
+          fontFamily: "'Cormorant Garamond', serif",
+          fontSize: "clamp(64px, 11vw, 150px)", 
+          color: "#fff",
+          lineHeight: 0.9, 
+          fontWeight: 600, 
+          letterSpacing: "-0.03em",
+          marginBottom: 16,
+          textShadow: "0 0 60px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.4)",
           opacity: fade ? 1 : 0,
           transform: fade ? "translateY(0)" : "translateY(40px)",
-          transition: "opacity 0.6s ease, transform 0.6s ease",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
           transitionDelay: "0.2s",
         }}>
           {d.name}
         </h1>
-
+ 
         <p style={{
           fontFamily: "'Montserrat', sans-serif",
-          fontSize: "clamp(15px, 2vw, 20px)", color: "rgba(255,255,255,0.85)",
-          maxWidth: 500, lineHeight: 1.6,
+          fontSize: "clamp(14px, 1.7vw, 18px)", 
+          color: "rgba(255,255,255,0.75)",
+          maxWidth: 480, 
+          lineHeight: 1.8,
           opacity: fade ? 1 : 0,
           transform: fade ? "translateY(0)" : "translateY(30px)",
-          transition: "opacity 0.5s ease, transform 0.5s ease",
+          transition: "opacity 0.6s ease, transform 0.6s ease",
           transitionDelay: "0.35s",
-          marginBottom: 32,
+          marginBottom: 44,
+          letterSpacing: "0.01em",
         }}>
           {d.tagline}
         </p>
@@ -1472,7 +1563,7 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
         *{box-sizing:border-box;margin:0;padding:0;}
@@ -1542,6 +1633,6 @@ export default function App() {
       <LeadOverlay />
       <AppRoutes />
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }

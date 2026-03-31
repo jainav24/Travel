@@ -61,8 +61,6 @@ const aboutDestinations = [
     { name: "Santorini", img: stockImages.greece.card },
     { name: "Japan", img: stockImages.japan.card },
     { name: "Dubai", img: stockImages.dubai.card },
-    { name: "Singapore", img: stockImages.singapore.card },
-    { name: "Mauritius", img: stockImages.mauritius.card },
 ];
 
 export default function AboutPage() {
@@ -218,6 +216,42 @@ export default function AboutPage() {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                {/* View All Button */}
+                <div style={{ textAlign: "center", marginTop: 50 }}>
+                    <button
+                        onClick={() => navigate("/destinations")}
+                        style={{
+                            display: "inline-block",
+                            background: "transparent",
+                            color: COLORS.primary,
+                            padding: "12px 32px",
+                            borderRadius: 50,
+                            border: `1.5px solid ${COLORS.primary}`,
+                            fontSize: 13,
+                            fontWeight: 600,
+                            letterSpacing: 1.5,
+                            textTransform: "uppercase",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease-in-out",
+                            fontFamily: "'Montserrat', sans-serif"
+                        }}
+                        onMouseOver={e => {
+                            e.currentTarget.style.background = COLORS.primary;
+                            e.currentTarget.style.color = "#fff";
+                            e.currentTarget.style.transform = "scale(1.05)";
+                            e.currentTarget.style.boxShadow = "0 8px 24px rgba(30,58,138,0.2)";
+                        }}
+                        onMouseOut={e => {
+                            e.currentTarget.style.background = "transparent";
+                            e.currentTarget.style.color = COLORS.primary;
+                            e.currentTarget.style.transform = "scale(1)";
+                            e.currentTarget.style.boxShadow = "none";
+                        }}
+                    >
+                        View All Destinations
+                    </button>
                 </div>
             </section>
 

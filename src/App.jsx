@@ -17,6 +17,8 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import destinations from "./data/destinations";
 import stockImages from "./data/stockImages";
+import baliImage from "./assets/Stock photos/bali.jpeg";
+import dubaiImage from "./assets/Stock photos/dubai.jpeg";
 
 // ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
 
@@ -56,8 +58,8 @@ const testimonials = [
 ];
 
 const heroDestinations = [
-  { name: "Bali", country: "Indonesia", tagline: "Island of the Gods", img: stockImages.bali.hero, slug: "bali" },
-  { name: "Dubai", country: "UAE", tagline: "City of Gold & Grandeur", img: stockImages.dubai.hero, slug: "dubai" },
+  { name: "Bali", country: "Indonesia", tagline: "Island of the Gods", img: baliImage, slug: "bali" },
+  { name: "Dubai", country: "UAE", tagline: "City of Gold & Grandeur", img: dubaiImage, slug: "dubai" },
   { name: "Northern Lights", country: "Scandinavia", tagline: "Nature's Greatest Light Show", img: stockImages["northern-lights"].hero, slug: "northern-lights" },
   { name: "Japan", country: "Japan", tagline: "Where Tradition Meets Tomorrow", img: stockImages.japan.hero, slug: "japan" },
   { name: "Greece", country: "Greece", tagline: "Sunsets Over the Aegean", img: stockImages.greece.hero, slug: "greece" },
@@ -690,7 +692,7 @@ function HeroDestinations() {
     <section style={{ position: "relative", height: "100vh", minHeight: 650, overflow: "hidden" }}>
       {/* Current slide bg */}
       <div style={{ position: "absolute", inset: 0, transition: "opacity 0.8s ease", opacity: fade ? 1 : 0 }}>
-        <img src={d.img} alt={d.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="eager" />
+        <img src={d.img} alt={d.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} loading="eager" />
       </div>
 
       {/* Gradient overlay */}

@@ -1,4 +1,4 @@
-import stockImages from "./stockImages";
+import stockImages, { destinationImages } from "./stockImages";
 
 const destinations = [
     {
@@ -9,8 +9,9 @@ const destinations = [
         bestTime: "May to September & December to February",
         description:
             "Experience the charm of Almaty, a picturesque destination nestled in the Tian Shan mountains. With its serene landscapes, premium experiences, and unique cultural vibe, it promises a refreshing and luxurious getaway.",
-        heroImg: "https://images.unsplash.com/photo-1586871608370-4adee64d1794?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1586871608370-4adee64d1794?w=600&q=80",
+        image: destinationImages["Almaty"],
+        heroImg: destinationImages["Almaty"],
+        cardImg: destinationImages["Almaty"],
         packages: [
             {
                 title: "A Blend of City Charms and Natural Wonders",
@@ -102,8 +103,9 @@ const destinations = [
         bestTime: "April to October",
         description:
             "Bali is a captivating tropical paradise known for its lush green rice terraces, pristine beaches, and rich cultural heritage. From serene temples and spiritual retreats to vibrant markets and beach clubs, the island offers a perfect blend of relaxation and adventure—making it an ideal destination for every kind of traveler.",
-        heroImg: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80",
+        image: destinationImages["Bali"],
+        heroImg: destinationImages["Bali"],
+        cardImg: destinationImages["Bali"],
         packages: [
             {
                 title: "Romantic Bali Escape | Ubud Culture & Private Candlelight Evening",
@@ -1039,8 +1041,9 @@ const destinations = [
         bestTime: "November to March",
         description:
             "Dubai is a dazzling city where futuristic skyscrapers meet rich Arabian heritage. From the towering Burj Khalifa to golden desert safaris and luxury shopping, it offers adventure, culture, and unforgettable experiences. A perfect blend of modernity and tradition, Dubai captivates every traveler.",
-        heroImg: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80",
+        image: destinationImages["Dubai"],
+        heroImg: destinationImages["Dubai"],
+        cardImg: destinationImages["Dubai"],
         packages: [
             {
                 title: "Glamorous Dubai Escape | City Highlights & Luxury Cruise",
@@ -1887,8 +1890,9 @@ const destinations = [
         bestTime: "September to March",
         description:
             "The Northern Lights, or Aurora Borealis, are a breathtaking natural phenomenon where vibrant waves of green, purple, and blue light dance across the night sky. They are best seen in destinations like Norway, Finland, Iceland, Sweden, and parts of northern Canada and Alaska.",
-        heroImg: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&q=80",
+        image: destinationImages["Northern Lights"],
+        heroImg: destinationImages["Northern Lights"],
+        cardImg: destinationImages["Northern Lights"],
         packages: [
             {
                 title: "Scandinavian Splendour | Oslo & Tromsø Discovery",
@@ -2693,8 +2697,9 @@ const destinations = [
         tag: "City",
         description:
             "A vertical city of extraordinary contrasts — gleaming skyscrapers reflected in Victoria Harbour, ancient incense-filled temples wedged between financial towers, and dim sum breakfasts that last half a day.",
-        heroImg: "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=600&q=80",
+        image: destinationImages["Hong Kong"],
+        heroImg: destinationImages["Hong Kong"],
+        cardImg: destinationImages["Hong Kong"],
         packages: [
             { title: "Hong Kong Highlights | Harbour, Hills & Heritage", duration: "4N 5D", price: "Starting from $799" },
             { title: "City & Lantau Island Escape | Big Buddha & Malls", duration: "5N 6D", price: "Starting from $949" },
@@ -2709,8 +2714,9 @@ const destinations = [
         bestTime: "October to April",
         description:
             "Japan is a fascinating blend of ancient traditions and cutting-edge modernity, known for its bustling cities, serene temples, and stunning natural landscapes. From the neon-lit streets of Tokyo to the historic shrines of Kyoto and the iconic Mount Fuji, Japan offers a rich cultural experience, world-class cuisine, and unique festivals that captivate travelers year-round.",
-        heroImg: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80",
+        image: destinationImages["Japan"],
+        heroImg: destinationImages["Japan"],
+        cardImg: destinationImages["Japan"],
         packages: [
             {
                 title: "Japan Illuminated | From Tokyo Skylines to Osaka Streets",
@@ -3506,8 +3512,9 @@ const destinations = [
         bestTime: "April to October",
         description:
             "From the glittering twin towers of Kuala Lumpur to ancient rainforests older than the Amazon, Malaysia is a sensory feast — multi-ethnic street food, colonial hill stations, and pristine coral islands.",
-        heroImg: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80",
+        image: destinationImages["Malaysia"],
+        heroImg: destinationImages["Malaysia"],
+        cardImg: destinationImages["Malaysia"],
         packages: [
             {
                 title: "Charming Malaysia Budget Vacay",
@@ -4195,11 +4202,12 @@ const destinations = [
         slug: "singapore",
         country: "Singapore",
         tag: "Modern",
-        bestTime: "February to July",
+        bestTime: "February to April",
         description:
-            "Singapore is a vibrant island city-state known for its perfect blend of modern innovation and rich cultural heritage. From iconic landmarks like Marina Bay Sands and Gardens by the Bay to bustling neighborhoods such as Chinatown and Little India, the city offers diverse experiences for every traveler. Renowned for its cleanliness, safety, and world-class infrastructure, Singapore is also a paradise for food lovers, featuring everything from street hawker fare to fine dining.",
-        heroImg: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=600&q=80",
+            "Singapore is a vibrant city-state known for its stunning architecture, lush greenery, and multicultural heritage. From the futuristic Gardens by the Bay and the iconic Marina Bay Sands to its world-class dining and shopping, Singapore offers a blend of luxury and cultural diversity.",
+        image: destinationImages["Singapore"],
+        heroImg: destinationImages["Singapore"],
+        cardImg: destinationImages["Singapore"],
         packages: [
             {
                 title: "Singapore City & Safari | A Twilight Adventure",
@@ -4919,8 +4927,9 @@ const destinations = [
         bestTime: "April to October",
         description:
             "Greece is a beautiful Mediterranean destination known for its rich history, stunning islands, whitewashed architecture, and crystal-clear waters. From ancient landmarks like Athens' Acropolis to the breathtaking sunsets of Santorini and vibrant nightlife of Mykonos, Greece offers a perfect blend of culture, relaxation, and scenic beauty.",
-        heroImg: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=600&q=80",
+        image: destinationImages["Greece"],
+        heroImg: destinationImages["Greece"],
+        cardImg: destinationImages["Greece"],
         packages: [
             {
                 title: "Santorini Bliss | Sunsets & Cycladic Charm",
@@ -5684,10 +5693,12 @@ const destinations = [
         slug: "mauritius",
         country: "Mauritius",
         tag: "Beach",
+        bestTime: "May to December",
         description:
-            "An island so beautiful Darwin called it the 'Garden of Eden'. Mauritius wraps powder-white beaches in a lagoon of every shade of turquoise, topped with world-class resorts and Creole cuisine of extraordinary depth.",
-        heroImg: "https://images.unsplash.com/photo-1589197331516-4d84b72ebde3?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1589197331516-4d84b72ebde3?w=600&q=80",
+            "Mauritius is a tropical paradise known for its pristine beaches, turquoise lagoons, and lush green landscapes. From its vibrant coral reefs and world-class resorts to its rich cultural heritage and warm hospitality, Mauritius offers a perfect blend of relaxation and adventure in the heart of the Indian Ocean.",
+        image: destinationImages["Mauritius"],
+        heroImg: destinationImages["Mauritius"],
+        cardImg: destinationImages["Mauritius"],
         packages: [
             { title: "Island Bliss | Beaches & Water Sports", duration: "5N 6D", price: "Starting from $1,299" },
             { title: "Luxury Mauritius | 5-Star Resort & Spa Escape", duration: "6N 7D", price: "Starting from $1,899" },
@@ -5748,8 +5759,9 @@ const destinations = [
         bestTime: "October to December",
         description:
             "A dazzling fusion of East and West, Hong Kong enchants with its soaring skyline, legendary street food, world-class theme parks, and vibrant harbour views. Just a ferry ride away, Macau adds a touch of Venetian glamour to this unforgettable destination.",
-        heroImg: "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=600&q=80",
+        image: destinationImages["Hong Kong"],
+        heroImg: destinationImages["Hong Kong"],
+        cardImg: destinationImages["Hong Kong"],
         packages: [
             {
                 title: "Hong Kong Grand Luxe Tour",

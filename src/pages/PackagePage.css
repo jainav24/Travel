@@ -930,6 +930,12 @@
 }
 
 @media(max-width: 768px) {
+  .pkgE-hero-content {
+    bottom: 40px !important;
+    padding: 0 20px !important;
+    text-align: left !important;
+  }
+
   .pkgE-mobile-info-bridge {
     display: flex;
   }

@@ -303,7 +303,14 @@ export default function DestinationsPage() {
                 }
                 @media(max-width: 768px) {
                     section:first-of-type { height: 45vh !important; min-height: 380px !important; margin-bottom: 32px !important; }
-                    .destinations-hero-content { padding: 0 20px !important; text-align: center !important; }
+                    .destinations-hero-content { 
+                        position: absolute !important;
+                        bottom: 40px !important;
+                        left: 0 !important;
+                        right: 0 !important;
+                        padding: 0 20px !important; 
+                        text-align: left !important; 
+                    }
                     .destinations-hero-content h1 { font-size: 38px !important; line-height: 1.15 !important; }
                     
                     section:nth-of-type(2) { margin-bottom: 32px !important; padding: 0 20px !important; }

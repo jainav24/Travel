@@ -287,8 +287,22 @@ export default function AboutPage() {
             <style>{`
                 @media(max-width: 768px) {
                     /* Hero */
+                    .about-hero-content {
+                        position: absolute !important;
+                        bottom: 100px !important;
+                        left: 0 !important;
+                        right: 0 !important;
+                        padding: 0 20px !important;
+                        text-align: left !important;
+                        margin-top: 0 !important;
+                    }
                     .about-hero-content h1 { font-size: 38px !important; }
-                    .about-hero-content p { font-size: 14px !important; line-height: 1.6 !important; }
+                    .about-hero-content p { 
+                        font-size: 14px !important; 
+                        line-height: 1.6 !important; 
+                        margin-left: 0 !important;
+                        margin-right: auto !important;
+                    }
 
                     /* Story section */
                     section:nth-of-type(3) > div { grid-template-columns: 1fr !important; gap: 40px !important; }

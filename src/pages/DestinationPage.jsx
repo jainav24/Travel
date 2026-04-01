@@ -271,9 +271,9 @@ export default function DestinationPage() {
                     
                     /* Hero Alignment */
                     .hero-text-container { 
-                        bottom: 25% !important; 
-                        align-items: center !important; 
-                        text-align: center !important; 
+                        bottom: 40px !important; 
+                        align-items: flex-start !important; 
+                        text-align: left !important; 
                         padding: 0 20px !important;
                     }
                     .hero-text-container h1 { 
@@ -282,7 +282,7 @@ export default function DestinationPage() {
                         line-height: 1.1 !important;
                     }
                     .hero-text-container > div:last-child {
-                        justify-content: center !important;
+                        justify-content: flex-start !important;
                         width: 100% !important;
                     }
                     

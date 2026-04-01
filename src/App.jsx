@@ -649,9 +649,10 @@ function Navbar() {
           
           /* Hero mobile alignment & padding */
           .hero-content { 
-            padding: 0 20px !important; 
-            text-align: center !important; 
-            align-items: center !important; 
+            padding: 0 20px 40px 20px !important; 
+            text-align: left !important; 
+            align-items: flex-start !important; 
+            justify-content: flex-end !important;
           }
           .hero-content h1 { 
             font-size: clamp(38px, 10vw, 56px) !important; 
@@ -661,7 +662,7 @@ function Navbar() {
           .hero-content p { 
             font-size: 14px !important; 
             margin-bottom: 32px !important; 
-            margin-left: auto !important; 
+            margin-left: 0 !important; 
             margin-right: auto !important; 
             max-width: 90% !important;
             line-height: 1.6 !important;
@@ -670,6 +671,7 @@ function Navbar() {
             width: 100% !important; 
             max-width: 280px !important; 
             padding: 14px 0 !important; 
+            align-self: flex-start !important;
           }
           .hero-side-dots { display: none !important; }
           .hero-counter { bottom: 20px !important; width: 100% !important; text-align: center !important; left: 0 !important; }

@@ -38,7 +38,7 @@ export default function DestinationCard({ destination, offset }) {
             <style>{`
                 .destination-card-wrapper { width: clamp(220px, 26vw, 340px); }
                 @media (max-width: 768px) {
-                    .destination-card-wrapper { width: 100% !important; margin-bottom: 12px !important; }
+                    .destination-card-wrapper { width: clamp(240px, 75vw, 300px) !important; }
                     .dest-card-content { 
                         text-align: center !important; 
                         left: 16px !important; 

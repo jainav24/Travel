@@ -21,70 +21,128 @@ export default function DestinationCard({ destination, offset }) {
     const opacity = Math.max(0.35, 1 - absOffset * 0.3);
     const zIndex = Math.round(100 - absOffset * 10);
 
+    const [hovered, setHovered] = React.useState(false);
     const cardImage = destinationImages[destination.name];
 
     return (
         <motion.div
             onClick={() => navigate(`/destination/${destination.slug}`)}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
             animate={{ scale, opacity, filter: `blur(${blur}px)` }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             whileHover={isCenter ? { scale: 1.03 } : {}}
             style={{ zIndex, flexShrink: 0, cursor: "pointer", willChange: "transform, opacity, filter" }}
-            className="w-[clamp(220px,26vw,340px)]"
+            className="destination-card-wrapper"
         >
+            <style>{`
+                .destination-card-wrapper { width: clamp(220px, 26vw, 340px); }
+                @media (max-width: 768px) {
+                    .destination-card-wrapper { width: 100% !important; margin-bottom: 12px !important; }
+                    .dest-card-content { 
+                        text-align: center !important; 
+                        left: 16px !important; 
+                        right: 16px !important; 
+                        bottom: 40px !important; 
+                        display: flex !important; 
+                        flex-direction: column !important; 
+                        align-items: center !important; 
+                    }
+                    .destination-card-shell { border-radius: 20px !important; }
+                }
+            `}</style>
             {/* Card shell */}
             <div
-                className="relative overflow-hidden"
+                className="destination-card-shell"
                 style={{
-                    aspectRatio: "3 / 4",
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
                     borderRadius: 24,
-                    boxShadow: isCenter
-                        ? "10px 10px 30px rgba(0,0,0,0.12), -4px -4px 16px rgba(255,255,255,0.7), inset 1px 1px 2px rgba(255,255,255,0.4)"
-                        : "6px 6px 20px rgba(0,0,0,0.08), -2px -2px 10px rgba(255,255,255,0.5)",
-                    border: isCenter ? `2px solid ${COLORS.secondary}` : "1px solid rgba(0,0,0,0.06)",
+                    overflow: "hidden",
+                    aspectRatio: "3/4.2",
+                    boxShadow: isCenter ? "0 20px 40px rgba(0,0,0,0.25)" : "0 10px 20px rgba(0,0,0,0.08)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    transition: "all 0.4s ease",
                 }}
             >
-                {/* Image */}
+                {/* Background Image */}
                 <img
                     src={cardImage}
                     alt={destination.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
+                    style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        transform: hovered ? "scale(1.08)" : "scale(1)",
+                        transition: "transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)",
+                    }}
                 />
 
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+                {/* Overlays */}
+                <div style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: isCenter
+                        ? "linear-gradient(to top, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.2) 60%, transparent 100%)"
+                        : "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)",
+                    transition: "opacity 0.4s",
+                }} />
 
-                {/* Tag badge */}
-                <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-white text-[10px] font-bold tracking-widest uppercase"
-                    style={{ background: COLORS.secondary }}>
-                    {destination.tag}
-                </div>
-
-                {/* Text info */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <div className="text-[10px] tracking-[3px] uppercase mb-1"
-                        style={{ fontFamily: "'Montserrat', sans-serif", color: "rgba(255,255,255,0.6)" }}>
+                {/* Content */}
+                <div
+                    className="dest-card-content"
+                    style={{
+                        position: "absolute",
+                        bottom: 32,
+                        left: 28,
+                        right: 28,
+                        zIndex: 2,
+                    }}
+                >
+                    <div
+                        style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontSize: 10,
+                            color: COLORS.secondary,
+                            fontWeight: 700,
+                            letterSpacing: 2.5,
+                            textTransform: "uppercase",
+                            marginBottom: 8,
+                            opacity: isCenter ? 1 : 0.8,
+                        }}
+                    >
                         {destination.country}
                     </div>
-                    <div className="text-2xl font-bold text-white leading-tight mb-2"
-                        style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    <h3
+                        style={{
+                            fontFamily: "'Cormorant Garamond', serif",
+                            fontSize: "clamp(24px, 2.8vw, 36px)",
+                            color: "#fff",
+                            fontWeight: 700,
+                            margin: "0 0 12px 0",
+                            lineHeight: 1.1,
+                        }}
+                    >
                         {destination.name}
+                    </h3>
+                    <div
+                        style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontSize: 11,
+                            color: "#fff",
+                            fontWeight: 600,
+                            letterSpacing: 1.5,
+                            textTransform: "uppercase",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 8,
+                        }}
+                    >
+                        Explore <span style={{ transition: "transform 0.3s", transform: hovered ? "translateX(4px)" : "none" }}>&rarr;</span>
                     </div>
-                    <AnimatePresence>
-                        {isCenter && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 8 }}
-                                transition={{ duration: 0.3 }}
-                                className="flex items-center gap-2 text-xs font-semibold tracking-wide"
-                                style={{ fontFamily: "'Montserrat', sans-serif", color: COLORS.secondary }}
-                            >
-                                <span>Explore →</span>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
                 </div>
             </div>
         </motion.div>

@@ -643,10 +643,80 @@ function Navbar() {
       )}
 
       <style>{`
-        @media(max-width:768px){ .desktop-nav{display:none!important} .hamburger{display:block!important} }
+        @media(max-width:768px){ 
+          .desktop-nav{display:none!important} 
+          .hamburger{display:block!important}
+          
+          /* Hero mobile alignment & padding */
+          .hero-content { 
+            padding: 0 20px !important; 
+            text-align: center !important; 
+            align-items: center !important; 
+          }
+          .hero-content h1 { 
+            font-size: clamp(38px, 10vw, 56px) !important; 
+            line-height: 1.1 !important;
+            margin-bottom: 24px !important;
+          }
+          .hero-content p { 
+            font-size: 14px !important; 
+            margin-bottom: 32px !important; 
+            margin-left: auto !important; 
+            margin-right: auto !important; 
+            max-width: 90% !important;
+            line-height: 1.6 !important;
+          }
+          .hero-content button { 
+            width: 100% !important; 
+            max-width: 280px !important; 
+            padding: 14px 0 !important; 
+          }
+          .hero-side-dots { display: none !important; }
+          .hero-counter { bottom: 20px !important; width: 100% !important; text-align: center !important; left: 0 !important; }
+          
+          /* Global section spacing */
+          section { padding: 60px 20px !important; }
+          .section-title-wrap { text-align: center !important; margin-bottom: 40px !important; }
+          
+          /* Shared grids */
+          .experiences-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+          
+          /* Footer mobile shift */
+          footer { padding: 40px 20px !important; text-align: center !important; }
+          .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .footer-logo-wrap { align-items: center !important; margin-bottom: 10px !important; }
+          .footer-links-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .footer-bottom { 
+            flex-direction: column !important; 
+            gap: 16px !important; 
+            padding-top: 24px !important;
+            text-align: center !important;
+          }
+        }
+
+        /* Navbar & Global refinements */
+        body { overflow-x: hidden !important; width: 100%; position: relative; }
+        .navbar { transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease !important; }
+        
         @media(max-width:1100px){ .navbar-search { max-width: 280px !important; } }
-        @media(max-width:900px){ .navbar-search { max-width: 200px !important; } }
-        @media(max-width:768px){ .navbar-search { max-width: none!important; margin: 0 8px!important; } .navbar-search input { font-size: 12px!important; } .nav-search-placeholder { font-size: 11px!important; } }
+        @media(max-width:900px){ .navbar-search { max-width: 220px !important; } }
+        @media(max-width:768px){ 
+          .navbar-search { 
+            max-width: none !important; 
+            margin: 0 10px !important; 
+            order: 2 !important;
+            flex: 1 !important;
+          } 
+          .navbar-search input { font-size: 13px !important; } 
+          .nav-search-placeholder { font-size: 12px !important; } 
+          .nav-logo-link { order: 1 !important; width: 120px !important; }
+          .hamburger { order: 3 !important; padding: 8px !important; }
+        }
+        @media(max-width:480px) {
+          .navbar-search { display: none !important; } /* Hide complicated search on very small mobile to save space */
+          .nav-logo-link { width: 110px !important; }
+        }
+        
         .nav-link-hover:hover { color: ${COLORS.secondary} !important; }
         .mega-nav-link-premium { color: ${COLORS.dark}; transition: 0.2s; }
         .mega-nav-link-premium:hover { 
@@ -697,7 +767,7 @@ function HeroDestinations() {
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.1) 100%)" }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(0,0,0,0.45) 100%)" }} />
 
-      {/* Slide content — LEFT ALIGNED */}
+      {/* Slide content — CENTER ALIGNED ON MOBILE, LEFT ON DESKTOP */}
       <div className="hero-content" style={{
         position: "relative", zIndex: 4, height: "100%", display: "flex",
         flexDirection: "column", alignItems: "flex-start", justifyContent: "center",

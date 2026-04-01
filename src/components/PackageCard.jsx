@@ -62,19 +62,60 @@ function ListingCard({ pkg, index, destinationSlug, listingImage }) {
             style={{
                 display: "flex",
                 flexDirection: "row",
-                flexWrap: "wrap",
                 background: COLORS.bg,
-                borderRadius: 10,
+                borderRadius: 20,
                 border: "1px solid #e2e8f0",
                 overflow: "hidden",
                 cursor: pkg.hasDetailPage ? "pointer" : "default",
                 maxWidth: 960,
                 margin: "0 auto",
                 width: "100%",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
             }}
+            className="package-listing-card"
         >
+            <style>{`
+                @media (max-width: 768px) {
+                    .package-listing-card { 
+                        flex-direction: column !important; 
+                        border-radius: 20px !important; 
+                        margin-bottom: 24px !important; 
+                        width: 100% !important;
+                    }
+                    .listing-card-img-side { 
+                        flex: none !important; 
+                        height: 220px !important; 
+                        width: 100% !important;
+                    }
+                    .listing-card-content-side { 
+                        padding: 24px 20px !important; 
+                        text-align: center !important; 
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: center !important; 
+                    }
+                    .listing-card-content-side h3 {
+                        text-align: center !important;
+                    }
+                    .listing-card-content-side > div {
+                        width: 100% !important;
+                        justify-content: center !important;
+                    }
+                    .listing-card-price-row { 
+                        flex-direction: column !important; 
+                        align-items: center !important; 
+                        text-align: center !important;
+                        gap: 16px !important; 
+                        width: 100% !important; 
+                        margin-top: 16px !important;
+                    }
+                    .listing-card-cta-btn { width: 100% !important; max-width: 280px !important; }
+                    .listing-card-highlights { justify-content: center !important; }
+                }
+            `}</style>
             {/* Image ~40% */}
             <div
+                className="listing-card-img-side"
                 style={{
                     flex: "1 1 260px",
                     minHeight: 200,
@@ -124,6 +165,7 @@ function ListingCard({ pkg, index, destinationSlug, listingImage }) {
 
             {/* Content ~60% */}
             <div
+                className="listing-card-content-side"
                 style={{
                     flex: "1 1 300px",
                     padding: "22px 24px 20px",
@@ -210,6 +252,7 @@ function ListingCard({ pkg, index, destinationSlug, listingImage }) {
                 )}
 
                 <div
+                    className="listing-card-price-row"
                     style={{
                         display: "flex",
                         alignItems: "flex-end",
@@ -271,8 +314,9 @@ function ListingCard({ pkg, index, destinationSlug, listingImage }) {
                             e.stopPropagation();
                             go();
                         }}
+                        className="listing-card-cta-btn"
                         style={{
-                            padding: "12px 28px",
+                            padding: "14px 44px",
                             borderRadius: 999,
                             border: "none",
                             background: COLORS.yellowCta,
@@ -281,7 +325,7 @@ function ListingCard({ pkg, index, destinationSlug, listingImage }) {
                             fontSize: 13,
                             fontWeight: 800,
                             cursor: "pointer",
-                            boxShadow: "0 2px 8px rgba(250,204,21,0.45)",
+                            boxShadow: "0 8px 25px rgba(250,204,21,0.4)",
                         }}
                     >
                         Get Offer
@@ -331,9 +375,34 @@ function HorizontalSplitCard({ pkg, index, destinationSlug, listingImage }) {
         >
             <style>{`
                 @media (max-width: 768px) {
-                    .horizontal-split-wrapper { flex-direction: column !important; }
-                    .h-split-left { width: 100% !important; height: 220px !important; }
-                    .h-split-right { width: 100% !important; padding: 20px !important; }
+                    .horizontal-split-wrapper { 
+                        flex-direction: column !important; 
+                        width: 100% !important;
+                    }
+                    .h-split-left { 
+                        width: 100% !important; 
+                        height: 220px !important; 
+                        flex: none !important; 
+                    }
+                    .h-split-right { 
+                        width: 100% !important; 
+                        padding: 24px 20px !important; 
+                        text-align: center !important; 
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: center !important; 
+                    }
+                    .h-split-right h3 {
+                        text-align: center !important;
+                    }
+                    .h-split-price-section { 
+                        flex-direction: column !important; 
+                        align-items: center !important; 
+                        text-align: center !important;
+                        gap: 16px !important; 
+                        width: 100% !important; 
+                    }
+                    .h-split-cta-btn { width: 100% !important; max-width: 280px !important; }
                 }
             `}</style>
 
@@ -362,7 +431,7 @@ function HorizontalSplitCard({ pkg, index, destinationSlug, listingImage }) {
                     ) : (
                         <div style={{ width: "100%", height: "100%", background: `linear-gradient(135deg, ${COLORS.primary}22, ${COLORS.primaryLight}33)` }} />
                     )}
-                    
+
                     {/* Duration Badge */}
                     <div
                         style={{
@@ -472,6 +541,7 @@ function HorizontalSplitCard({ pkg, index, destinationSlug, listingImage }) {
 
                     {/* Price Section */}
                     <div
+                        className="h-split-price-section"
                         style={{
                             marginTop: "auto",
                             display: "flex",
@@ -493,10 +563,11 @@ function HorizontalSplitCard({ pkg, index, destinationSlug, listingImage }) {
                         </div>
 
                         <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="h-split-cta-btn"
                             style={{
-                                padding: "12px 32px",
+                                padding: "14px 44px",
                                 borderRadius: 50,
                                 background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.primaryLight})`,
                                 color: "#fff",
@@ -506,7 +577,7 @@ function HorizontalSplitCard({ pkg, index, destinationSlug, listingImage }) {
                                 letterSpacing: 1,
                                 border: "none",
                                 cursor: "pointer",
-                                boxShadow: "0 6px 20px rgba(30,58,138,0.25)",
+                                boxShadow: "0 10px 30px rgba(30,58,138,0.25)",
                             }}
                         >
                             {pkg.hasDetailPage ? "View Details" : "Get Offer"}
@@ -539,7 +610,7 @@ export default function PackageCard({ pkg, index, destinationSlug, variant = "gr
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.06, duration: 0.5 }}
-            className="group relative"
+            className="package-grid-card group relative"
             style={{
                 background: COLORS.bg,
                 borderRadius: 20,
@@ -563,6 +634,32 @@ export default function PackageCard({ pkg, index, destinationSlug, variant = "gr
             }}
             onClick={handleClick}
         >
+            <style>{`
+                @media (max-width: 768px) {
+                    .package-grid-card { 
+                        width: 100% !important; 
+                        min-width: 0 !important; 
+                        flex: 1 1 100% !important; 
+                        margin-bottom: 20px !important;
+                        text-align: center !important;
+                    }
+                    .package-grid-card h3 {
+                        text-align: center !important;
+                    }
+                    .package-grid-card ul {
+                        align-items: center !important;
+                    }
+                    .package-grid-card div[style*="marginTop: 'auto'"] {
+                        flex-direction: column !important;
+                        gap: 16px !important;
+                        align-items: center !important;
+                    }
+                    .package-grid-card button {
+                        width: 100% !important;
+                        max-width: 200px !important;
+                    }
+                }
+            `}</style>
             {/* Image Header */}
             <div style={{ height: 200, width: "100%", position: "relative", overflow: "hidden" }}>
                 {(listingImage || pkg.listingImage) ? (
@@ -579,7 +676,7 @@ export default function PackageCard({ pkg, index, destinationSlug, variant = "gr
                 ) : (
                     <div style={{ width: "100%", height: "100%", background: `linear-gradient(135deg, ${COLORS.primary}22, ${COLORS.primaryLight}33)` }} />
                 )}
-                
+
                 {/* Duration Badge */}
                 <div
                     style={{
@@ -624,15 +721,15 @@ export default function PackageCard({ pkg, index, destinationSlug, variant = "gr
                 {pkg.highlights && pkg.highlights.length > 0 && (
                     <ul style={{ padding: 0, margin: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 4 }}>
                         {pkg.highlights.slice(0, 3).map((h, i) => (
-                            <li 
-                                key={i} 
-                                style={{ 
-                                    fontFamily: "'Montserrat', sans-serif", 
-                                    fontSize: 12, 
-                                    color: COLORS.muted, 
-                                    display: "flex", 
-                                    alignItems: "center", 
-                                    gap: 6 
+                            <li
+                                key={i}
+                                style={{
+                                    fontFamily: "'Montserrat', sans-serif",
+                                    fontSize: 12,
+                                    color: COLORS.muted,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 6
                                 }}
                             >
                                 <span style={{ color: COLORS.secondary, fontSize: 14 }}>•</span>

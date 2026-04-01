@@ -72,12 +72,14 @@ const DestinationGridCard = ({ dest, index, visible }) => {
 
             {/* Bottom-left text */}
             <div
+                className="dest-grid-card-content"
                 style={{
                     position: "absolute",
                     bottom: 24,
                     left: 24,
                     right: 24,
                     textAlign: "left",
+                    transition: "all 0.3s ease",
                 }}
             >
                 <h3
@@ -110,6 +112,20 @@ const DestinationGridCard = ({ dest, index, visible }) => {
                     Explore <span style={{ transform: hovered ? "translateX(4px)" : "translateX(0)", transition: "transform 0.3s", display: "inline-block" }}>&rarr;</span>
                 </div>
             </div>
+
+            <style>{`
+                @media(max-width: 768px) {
+                    .dest-grid-card-content { 
+                        text-align: center !important; 
+                        left: 16px !important; 
+                        right: 16px !important; 
+                        bottom: 30px !important; 
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: center !important;
+                    }
+                }
+            `}</style>
         </div>
     );
 };
@@ -145,7 +161,7 @@ export default function DestinationsPage() {
                 />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }} />
                 
-                <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "0 20px" }}>
+                <div style={{ position: relative, zIndex: 2, textAlign: "center", padding: "0 20px" }} className="destinations-hero-content">
                     <div style={{ 
                         fontSize: 12, 
                         letterSpacing: 6, 
@@ -190,7 +206,7 @@ export default function DestinationsPage() {
                         position: "relative", 
                         width: "100%", 
                         maxWidth: 500,
-                    }}>
+                    }} className="dest-search-bar">
                         <input 
                             type="text" 
                             placeholder="Find your dream destination..."
@@ -247,11 +263,11 @@ export default function DestinationsPage() {
             </section>
 
             {/* ── GRID ── */}
-            <section ref={gridRef} style={{ maxWidth: 1440, margin: "0 auto", padding: "0 5vw" }}>
+            <section ref={gridRef} style={{ maxWidth: 1440, margin: "0 auto", padding: "0 20px" }}>
                 <div style={{ 
                     display: "grid", 
-                    gridTemplateColumns: "repeat(4, 1fr)", 
-                    gap: "40px 32px",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", 
+                    gap: "32px 24px",
                 }} className="destinations-grid">
                     {filteredDestinations.map((dest, i) => (
                         <DestinationGridCard key={dest.slug} dest={dest} index={i} visible={visible} />
@@ -283,13 +299,26 @@ export default function DestinationsPage() {
             {/* Custom Responsive Styles */}
             <style>{`
                 .destinations-grid { 
-                    gap: 24px !important; 
+                    gap: 32px 24px !important; 
                 }
-                @media(max-width: 900px) {
+                @media(max-width: 768px) {
+                    section:first-of-type { height: 45vh !important; min-height: 380px !important; margin-bottom: 32px !important; }
+                    .destinations-hero-content { padding: 0 20px !important; text-align: center !important; }
+                    .destinations-hero-content h1 { font-size: 38px !important; line-height: 1.15 !important; }
+                    
+                    section:nth-of-type(2) { margin-bottom: 32px !important; padding: 0 20px !important; }
+                    .dest-search-bar { width: 100% !important; margin-bottom: 8px !important; }
+                    .dest-search-bar input { padding: 14px 20px 14px 48px !important; font-size: 13px !important; }
+                    .dest-search-bar svg { left: 18px !important; width: 18px !important; }
+                    
+                    .destinations-grid { 
+                        grid-template-columns: 1fr !important; 
+                        gap: 16px !important; 
+                        padding: 0 !important;
+                    }
+                }
+                @media(min-width: 769px) and (max-width: 1100px) {
                     .destinations-grid { grid-template-columns: repeat(2, 1fr) !important; }
-                }
-                @media(max-width: 600px) {
-                    .destinations-grid { grid-template-columns: repeat(1, 1fr) !important; }
                 }
             `}</style>
 

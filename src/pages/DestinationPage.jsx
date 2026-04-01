@@ -98,7 +98,7 @@ export default function DestinationPage() {
                 </button>
 
                 {/* Hero text */}
-                <div className="absolute bottom-[8%] px-[5vw]">
+                <div className="absolute bottom-[10%] left-0 right-0 px-[5vw] flex flex-col hero-text-container" style={{ alignItems: "flex-start" }}>
                     <div
                         className="text-[11px] tracking-[5px] uppercase font-bold mb-3"
                         style={{ fontFamily: "'Montserrat', sans-serif", color: COLORS.secondary }}
@@ -111,23 +111,25 @@ export default function DestinationPage() {
                     >
                         {destination.name}
                     </h1>
-                    <div
-                        className="inline-flex items-center px-5 py-2 rounded-full text-sm font-semibold mr-4"
-                        style={{
-                            background: "rgba(249,115,22,0.2)",
-                            border: `1px solid rgba(249,115,22,0.5)`,
-                            color: COLORS.secondary,
-                            fontFamily: "'Montserrat', sans-serif",
-                        }}
-                    >
-                        {destination.packages.length} Packages Available
+                    <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+                        <div
+                            className="inline-flex items-center px-5 py-2 rounded-full text-sm font-semibold"
+                            style={{
+                                background: "rgba(249,115,22,0.2)",
+                                border: `1px solid rgba(249,115,22,0.5)`,
+                                color: COLORS.secondary,
+                                fontFamily: "'Montserrat', sans-serif",
+                            }}
+                        >
+                            {destination.packages.length} Packages Available
+                        </div>
+                        <span
+                            className="text-xs tracking-wide scroll-indicator"
+                            style={{ fontFamily: "'Montserrat', sans-serif", color: "rgba(255,255,255,0.5)" }}
+                        >
+                            Scroll to explore ↓
+                        </span>
                     </div>
-                    <span
-                        className="text-xs tracking-wide"
-                        style={{ fontFamily: "'Montserrat', sans-serif", color: "rgba(255,255,255,0.5)" }}
-                    >
-                        Scroll to explore ↓
-                    </span>
                 </div>
 
                 {/* Floating Info Card */}
@@ -151,16 +153,45 @@ export default function DestinationPage() {
 
             </div>
 
+            {/* ── MOBILE INFO BRIDGE ── */}
+            <div className="mobile-info-bridge" style={{
+                background: COLORS.bg,
+                padding: "32px 20px",
+                display: "none", /* Hidden by default, shown in media query */
+                justifyContent: "space-around",
+                alignItems: "center",
+                borderBottom: "1px solid rgba(0,0,0,0.05)",
+                gap: 12
+            }}>
+                <div style={{ textAlign: "center", flex: 1 }}>
+                    <div style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
+                        <Calendar size={20} color={COLORS.primary} strokeWidth={1.5} />
+                    </div>
+                    <p style={{ fontSize: 10, color: COLORS.muted, textTransform: "uppercase", letterSpacing: 1, marginBottom: 2, fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Best Time</p>
+                    <h4 style={{ fontSize: 14, color: COLORS.dark, fontWeight: 700, margin: 0, fontFamily: "'Montserrat', sans-serif" }}>April – October</h4>
+                </div>
+
+                <div style={{ width: 1, height: 40, background: "rgba(0,0,0,0.08)" }} />
+
+                <div style={{ textAlign: "center", flex: 1 }}>
+                    <div style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
+                        <MapPin size={20} color={COLORS.primary} strokeWidth={1.5} />
+                    </div>
+                    <p style={{ fontSize: 10, color: COLORS.muted, textTransform: "uppercase", letterSpacing: 1, marginBottom: 2, fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Location</p>
+                    <h4 style={{ fontSize: 14, color: COLORS.dark, fontWeight: 700, margin: 0, fontFamily: "'Montserrat', sans-serif" }}>{destination.country || "Asia"}</h4>
+                </div>
+            </div>
+
             {/* ── DESCRIPTION ── */}
-            <div className="mx-auto px-[5vw] py-20" style={{ maxWidth: 860 }}>
+            <div className="mx-auto px-[5vw] py-20 destination-about-sec" style={{ maxWidth: 860 }}>
                 <div
-                    className="text-[11px] tracking-[5px] uppercase font-bold mb-5"
+                    className="text-[11px] tracking-[5px] uppercase font-bold mb-5 about-tag"
                     style={{ fontFamily: "'Montserrat', sans-serif", color: COLORS.primary }}
                 >
                     ✦ About {destination.name}
                 </div>
                 <p
-                    className="leading-relaxed italic"
+                    className="leading-relaxed italic about-desc"
                     style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(20px,2.8vw,28px)", color: COLORS.dark }}
                 >
                     {destination.description}
@@ -227,30 +258,67 @@ export default function DestinationPage() {
 
             <style>{`
                 @media(max-width: 768px) {
-                    .relative.overflow-hidden[style*="height: 100vh"] { height: 70vh !important; min-height: 400px !important; }
-                    .absolute.top-24 { top: 80px !important; }
-                    .absolute.bottom-\\[8\\%\\] { bottom: 5% !important; }
-                    .px-\\[5vw\\] { padding-left: 4vw !important; padding-right: 4vw !important; }
-                    .grid.gap-5 { grid-template-columns: 1fr !important; }
-                }
-                @media(max-width: 480px) {
-                    .relative.overflow-hidden[style*="height: 100vh"] { height: 60vh !important; min-height: 360px !important; }
-                    .absolute.bottom-\\[8\\%\\] h1 { font-size: clamp(36px, 10vw, 48px) !important; }
-                    .absolute.top-24 { top: 72px !important; font-size: 10px !important; padding: 8px 16px !important; }
+                    .relative.overflow-hidden[style*="height: 100vh"] { height: 75vh !important; min-height: 480px !important; }
+                    
+                    /* Back Button Fix - Move below navbar */
+                    .absolute.top-24 { 
+                        top: 90px !important; 
+                        left: 20px !important; 
+                        padding: 10px 20px !important;
+                        font-size: 11px !important;
+                        z-index: 50 !important;
+                    }
+                    
+                    /* Hero Alignment */
+                    .hero-text-container { 
+                        bottom: 25% !important; 
+                        align-items: center !important; 
+                        text-align: center !important; 
+                        padding: 0 20px !important;
+                    }
+                    .hero-text-container h1 { 
+                        font-size: clamp(40px, 12vw, 64px) !important; 
+                        margin-bottom: 20px !important; 
+                        line-height: 1.1 !important;
+                    }
+                    .hero-text-container > div:last-child {
+                        justify-content: center !important;
+                        width: 100% !important;
+                    }
+                    
+                    .scroll-indicator { display: none !important; }
+                    .px-\\[5vw\\] { padding-left: 20px !important; padding-right: 20px !important; }
+                    .grid.gap-5 { grid-template-columns: 1fr !important; gap: 24px !important; }
+                    
+                    /* About Section Padding */
+                    .destination-about-sec { 
+                        text-align: center !important; 
+                        padding-top: 50px !important; 
+                        padding-bottom: 50px !important; 
+                        padding-left: 24px !important;
+                        padding-right: 24px !important;
+                    }
+                    .about-tag { margin-bottom: 18px !important; }
+                    .about-desc { font-size: 22px !important; line-height: 1.7 !important; }
                 }
 
                 .floating-card {
                     position: absolute;
-                    bottom: 30px;
+                    bottom: 40px;
                     right: 40px;
                     width: 260px;
                     background: white;
-                    border-radius: 16px;
-                    padding: 16px;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+                    border-radius: 20px;
+                    padding: 24px;
+                    box-shadow: 0 15px 45px rgba(0,0,0,0.12);
                     backdrop-filter: blur(10px);
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
                     z-index: 20;
+                }
+                
+                @media(max-width: 768px) {
+                    .floating-card { display: none !important; }
+                    .mobile-info-bridge { display: flex !important; }
                 }
                 .floating-card:hover {
                     transform: translateY(-5px);
@@ -278,13 +346,6 @@ export default function DestinationPage() {
                     margin: 0;
                     color: #1a1a2e;
                     font-family: 'Montserrat', sans-serif;
-                }
-                @media(max-width: 768px) {
-                    .floating-card {
-                        right: 20px;
-                        bottom: 20px;
-                        width: 220px;
-                    }
                 }
             `}</style>
         </motion.div>

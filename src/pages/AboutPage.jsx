@@ -82,7 +82,7 @@ export default function AboutPage() {
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                 />
                 <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, rgba(30,58,138,0.82) 0%, rgba(15,23,42,0.7) 100%)` }} />
-                <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "0 20px", marginTop: 60 }}>
+                <div style={{ position: "relative", zIndex: 2, textAlign: "center", padding: "0 20px", marginTop: 60 }} className="about-hero-content">
                     <div style={{ fontSize: 11, letterSpacing: 6, color: COLORS.secondary, fontWeight: 700, textTransform: "uppercase", marginBottom: 18 }}>
                         ✦ Our Story ✦
                     </div>
@@ -119,7 +119,7 @@ export default function AboutPage() {
             {/* ── OUR STORY ── */}
             <section style={{ padding: "100px 5vw", maxWidth: 1200, margin: "0 auto" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 60, alignItems: "center" }}>
-                    <div>
+                    <div className="about-story-text">
                         <div style={{ fontSize: 11, letterSpacing: 5, color: COLORS.primary, fontWeight: 700, textTransform: "uppercase", marginBottom: 16 }}>✦ Who We Are</div>
                         <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, lineHeight: 1.15, marginBottom: 24, color: COLORS.dark }}>
                             A Team Obsessed<br />with Your Journey
@@ -287,27 +287,25 @@ export default function AboutPage() {
             <style>{`
                 @media(max-width: 768px) {
                     /* Hero */
-                    section:first-child { min-height: 400px !important; height: 55vh !important; }
-                    section:first-child h1 { font-size: 36px !important; }
+                    .about-hero-content h1 { font-size: 38px !important; }
+                    .about-hero-content p { font-size: 14px !important; line-height: 1.6 !important; }
 
-                    /* Story section grid */
-                    section:nth-of-type(3) > div > div { grid-template-columns: 1fr !important; gap: 30px !important; }
-                    section:nth-of-type(3) > div > div > div:last-child > div:first-child { border-radius: 20px !important; aspect-ratio: 16/10 !important; }
-                    section:nth-of-type(3) > div > div > div:last-child > div:last-child { display: none !important; }
-                    section:nth-of-type(3) > div > div > div:last-child > div:nth-child(2) { bottom: -16px !important; right: -8px !important; }
+                    /* Story section */
+                    section:nth-of-type(3) > div { grid-template-columns: 1fr !important; gap: 40px !important; }
+                    .about-story-text { text-align: center !important; order: 2 !important; }
+                    section:nth-of-type(3) > div > div:last-child { order: 1 !important; }
+                    section:nth-of-type(3) img { aspect-ratio: 16/10 !important; }
+                    
+                    /* Values section */
+                    section:nth-of-type(4) { text-align: center !important; }
 
-                    /* Values grid */
-                    section:nth-of-type(4) > div:last-child { grid-template-columns: 1fr !important; }
-
-
-
-                    /* Dest grid */
-                    section:nth-of-type(6) > div:last-child { grid-template-columns: 1fr !important; }
+                    /* Dest section */
+                    section:nth-of-type(5) { text-align: center !important; }
+                    section:nth-of-type(5) > div:nth-of-type(2) { grid-template-columns: 1fr !important; }
 
                     /* general */
-                    section { padding: 60px 4vw !important; }
+                    section { padding: 60px 20px !important; }
                 }
-
             `}</style>
 
         </div>

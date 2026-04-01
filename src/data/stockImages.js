@@ -43,7 +43,7 @@ export const destinationImages = {
     "Maldives": maldivesImg,
     "Malaysia": malaysiaImg,
     "Italy": italyImg,
-    "Netherlands": netherlandsImg,
+    "Netherland": netherlandsImg,
     "Australia": australiaImg,
     "Bali": baliImg,
     "Dubai": dubaiImg,

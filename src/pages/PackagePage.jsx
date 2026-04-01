@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Clock } from "lucide-react";
 import destinations from "../data/destinations";
 import "./PackagePage.css";
 
@@ -148,6 +149,17 @@ export default function PackagePage() {
                             ))}
                         </div>
                     )}
+                </div>
+            </div>
+            
+            {/* ── MOBILE INFO BRIDGE ── */}
+            <div className="pkgE-mobile-info-bridge">
+                <div style={{ textAlign: "center", flex: 1 }}>
+                    <div style={{ display: "flex", justifyContent: "center", marginBottom: 8 }}>
+                        <Clock size={20} color="#1E3A8A" strokeWidth={1.5} />
+                    </div>
+                    <p style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 2, fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Duration</p>
+                    <h4 style={{ fontSize: 14, color: "#1a1a2e", fontWeight: 700, margin: 0, fontFamily: "'Montserrat', sans-serif" }}>{pkg.duration}</h4>
                 </div>
             </div>
 

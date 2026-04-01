@@ -4926,7 +4926,7 @@ const destinations = [
         tag: "History",
         bestTime: "April to October",
         description:
-            "Greece is a beautiful Mediterranean destination known for its rich history, stunning islands, whitewashed architecture, and crystal-clear waters. From ancient landmarks like Athens' Acropolis to the breathtaking sunsets of Santorini and vibrant nightlife of Mykonos, Greece offers a perfect blend of culture, relaxation, and scenic beauty.",
+            "Greece is a timeless destination where ancient history and breathtaking landscapes converge. From the iconic Acropolis in Athens and the white-washed buildings of Santorini to its turquoise waters and sun-drenched islands, Greece offers an unforgettable and deeply enriching travel experience.",
         image: destinationImages["Greece"],
         heroImg: destinationImages["Greece"],
         cardImg: destinationImages["Greece"],
@@ -5036,7 +5036,7 @@ const destinations = [
                     {
                         day: 2,
                         title: "Athens City Tour with Acropolis & Museum",
-                        description: "After breakfast, embark on a guided half-day city tour, visiting Constitution Square, the Parliament, and the Temple of Zeus, with a photo opportunity at the all-marble Panathenaic Stadium. Continue to the Acropolis to explore the Parthenon, Temple of Athena Nike, and Erechtheion, followed by a visit to the Acropolis Museum to admire classical masterpieces up close. Spend the evening at your leisure. Overnight stay in Athens.",
+                        description: "After breakfast, embark on a guided half-day city tour, visiting Constitution Square, the Parliament, the Temple of Zeus, with a photo opportunity at the all-marble Panathenaic Stadium. Continue to the Acropolis to explore the Parthenon, Temple of Athena Nike, and Erechtheion, followed by a visit to the Acropolis Museum to admire classical masterpieces up close. Spend the evening at your leisure. Overnight stay in Athens.",
                         activities: [
                             "Constitution Square, Parliament, Temple of Zeus",
                             "Panathenaic Stadium photo stop",
@@ -5165,7 +5165,7 @@ const destinations = [
                     {
                         day: 2,
                         title: "Athens City Tour with Acropolis & Museum",
-                        description: "After breakfast, embark on a guided half-day city tour, visiting Constitution Square, the Parliament, and the Temple of Zeus, with a photo opportunity at the all-marble Panathenaic Stadium. Continue to the Acropolis to explore the Parthenon, Temple of Athena Nike, and Erechtheion, followed by a visit to the Acropolis Museum to admire classical masterpieces up close. Spend the evening at your leisure. Overnight stay in Athens.",
+                        description: "After breakfast, embark on a guided half-day city tour, visiting Constitution Square, the Parliament, the Temple of Zeus, with a photo opportunity at the all-marble Panathenaic Stadium. Continue to the Acropolis to explore the Parthenon, Temple of Athena Nike, and Erechtheion, followed by a visit to the Acropolis Museum to admire classical masterpieces up close. Spend the evening at your leisure. Overnight stay in Athens.",
                         activities: [
                             "Constitution Square, Parliament, Temple of Zeus",
                             "Panathenaic Stadium photo stop",
@@ -5276,7 +5276,7 @@ const destinations = [
                     {
                         day: 2,
                         title: "Athens City Tour with Acropolis & Museum",
-                        description: "After breakfast, embark on a guided half-day city tour, visiting Constitution Square, the Parliament, and the Temple of Zeus, with a photo opportunity at the all-marble Panathenaic Stadium. Continue to the Acropolis to explore the Parthenon, Temple of Athena Nike, and Erechtheion, followed by a visit to the Acropolis Museum to admire classical masterpieces up close. Spend the evening at your leisure. Overnight stay in Athens.",
+                        description: "After breakfast, embark on a guided half-day city tour, visiting Constitution Square, the Parliament, the Temple of Zeus, with a photo opportunity at the all-marble Panathenaic Stadium. Continue to the Acropolis to explore the Parthenon, Temple of Athena Nike, and Erechtheion, followed by a visit to the Acropolis Museum to admire classical masterpieces up close. Spend the evening at your leisure. Overnight stay in Athens.",
                         activities: [
                             "Constitution Square, Parliament, Temple of Zeus",
                             "Panathenaic Stadium photo stop",
@@ -5644,14 +5644,15 @@ const destinations = [
         ],
     },
     {
-        name: "Paris",
+        name: "France",
         slug: "paris",
         country: "France",
         tag: "Romance",
         description:
             "The City of Light has enchanted lovers, artists, and dreamers for centuries. Haussmann's boulevards, the Iron Lady glittering at midnight, and a croissant eaten standing at a zinc bar — Paris is an eternal feeling.",
-        heroImg: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+        image: destinationImages["France"],
+        heroImg: destinationImages["France"],
+        cardImg: destinationImages["France"],
         packages: [
             { title: "Paris Romantic Escape | Eiffel & Versailles", duration: "4N 5D", price: "Starting from $1,299" },
             { title: "Paris & Loire Valley | Art, Wine & Chateaux", duration: "6N 7D", price: "Starting from $1,799" },
@@ -5665,8 +5666,9 @@ const destinations = [
         tag: "Scenic",
         description:
             "A land of impossible postcards made real — the Jungfrau summit piercing clouds, mirror lakes reflecting the Matterhorn, and cogwheel trains climbing through meadows so green they seem painted.",
-        heroImg: "https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=600&q=80",
+        image: destinationImages["Switzerland"],
+        heroImg: destinationImages["Switzerland"],
+        cardImg: destinationImages["Switzerland"],
         packages: [
             { title: "Alpine Dream | Jungfrau & Interlaken", duration: "6N 7D", price: "Starting from $2,199" },
             { title: "Swiss Scenic Rail | Glacier Express Journey", duration: "7N 8D", price: "Starting from $2,599" },
@@ -5680,8 +5682,9 @@ const destinations = [
         tag: "Culture",
         description:
             "From the gilded onion domes of Red Square to the mind-bending art collections of the Hermitage, Russia's imperial cities deliver grandeur on a scale found nowhere else — history you can walk through.",
-        heroImg: "https://images.unsplash.com/photo-1513326738677-b964603b136d?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1513326738677-b964603b136d?w=600&q=80",
+        image: destinationImages["Russia"],
+        heroImg: destinationImages["Russia"],
+        cardImg: destinationImages["Russia"],
         packages: [
             { title: "Moscow & St. Petersburg | Twin Imperial Cities", duration: "7N 8D", price: "Starting from $1,199" },
             { title: "Trans-Siberian Express | Epic Rail Adventure", duration: "12N 13D", price: "Starting from $2,499" },
@@ -5712,8 +5715,9 @@ const destinations = [
         tag: "Exotic",
         description:
             "The Land of Smiles delivers every kind of travel fantasy — emerald jungle islands, gilded temples draped in monks' saffron robes, night markets of thousand-year-old recipes, and beach clubs that face perfect sunsets.",
-        heroImg: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80",
+        image: destinationImages["Thailand"],
+        heroImg: destinationImages["Thailand"],
+        cardImg: destinationImages["Thailand"],
         packages: [
             { title: "Phuket Paradise | Beaches & Night Life", duration: "4N 5D", price: "Starting from $699" },
             { title: "Bangkok & Chiang Mai | Culture & Temples", duration: "6N 7D", price: "Starting from $949" },
@@ -5728,8 +5732,9 @@ const destinations = [
         tag: "Heritage",
         description:
             "Where continents collide and civilisations overlap. Turkey offers hot air balloons over Cappadocia's fairy chimneys at dawn, Istanbul's Byzantine mosaics, and a turquoise coast untouched by time.",
-        heroImg: "https://images.unsplash.com/photo-1569949381669-ecf31ae8e613?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1569949381669-ecf31ae8e613?w=600&q=80",
+        image: destinationImages["Turkey"],
+        heroImg: destinationImages["Turkey"],
+        cardImg: destinationImages["Turkey"],
         packages: [
             { title: "Istanbul & Cappadocia | Hot Air & Heritage", duration: "6N 7D", price: "Starting from $1,099" },
             { title: "Turquoise Coast Gulet | Aegean Sailing", duration: "7N 8D", price: "Starting from $1,499" },
@@ -5743,8 +5748,9 @@ const destinations = [
         tag: "Discover",
         description:
             "A country of remarkable variety — Ha Long Bay's limestone karsts rising from jade water, Hoi An's ancient lantern-lit alleyways, and a food culture so vibrant and regional that every city is a completely different meal.",
-        heroImg: "https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=1400&q=85",
-        cardImg: "https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=600&q=80",
+        image: destinationImages["Vietnam"],
+        heroImg: destinationImages["Vietnam"],
+        cardImg: destinationImages["Vietnam"],
         packages: [
             { title: "Ha Long Bay & Hanoi Discovery", duration: "5N 6D", price: "Starting from $749" },
             { title: "Vietnam North to South | Hanoi, Hue, Hoi An & Saigon", duration: "9N 10D", price: "Starting from $1,199" },

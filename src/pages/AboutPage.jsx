@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import stockImages from "../data/stockImages";
+import { destinationImages } from "../data/stockImages";
 import { Compass, Crown, Leaf, Headphones, MapPin, Sparkles } from "lucide-react";
 
 const COLORS = {
@@ -57,10 +57,10 @@ const values = [
 
 
 const aboutDestinations = [
-    { name: "Bali", img: stockImages.bali.card },
-    { name: "Santorini", img: stockImages.greece.card },
-    { name: "Japan", img: stockImages.japan.card },
-    { name: "Dubai", img: stockImages.dubai.card },
+    { name: "Bali", img: destinationImages["Bali"] },
+    { name: "Greece", img: destinationImages["Greece"] },
+    { name: "Japan", img: destinationImages["Japan"] },
+    { name: "Dubai", img: destinationImages["Dubai"] },
 ];
 
 export default function AboutPage() {
@@ -77,7 +77,7 @@ export default function AboutPage() {
             {/* ── HERO ── */}
             <section style={{ position: "relative", height: "70vh", minHeight: 520, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <img
-                    src={stockImages["northern-lights"].hero}
+                    src={destinationImages["Northern Lights"]}
                     alt="About hero"
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                 />
@@ -146,7 +146,7 @@ export default function AboutPage() {
                     </div>
                     <div style={{ position: "relative" }}>
                         <div style={{ borderRadius: 24, overflow: "hidden", aspectRatio: "4/5", boxShadow: "12px 12px 30px rgba(0,0,0,0.1), -6px -6px 16px rgba(255,255,255,0.7)" }}>
-                            <img src={stockImages.bali.gallery[2]} alt="Travellers" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                            <img src={destinationImages["Bali"]} alt="Travellers" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         </div>
                         <div style={{
                             position: "absolute", bottom: -24, right: -24,

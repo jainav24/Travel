@@ -1,69 +1,72 @@
 // ─── STOCK PHOTO IMPORTS ─────────────────────────────────────────────────
-// Central mapping of all stock photos organized by destination.
-// Each destination has ONE unique image for card and general display as requested.
+// Strict 1-to-1 mapping as requested.
 
-// ── ALMATY ──
-import almatyImg from "../assets/Stock photos/Almaty/visit-almaty-wN4D-mVR7fE-unsplash.jpg";
-
-// ── BALI ──
+// Exact file imports
+import usaImg from "../assets/Stock photos/United States of America.jpg";
+import ukImg from "../assets/Stock photos/United Kingdom.jpg";
+import turkeyImg from "../assets/Stock photos/Turkey.jpg";
+import thailandImg from "../assets/Stock photos/Thailand.jpg";
+import switzerlandImg from "../assets/Stock photos/Switerland.jpg";
+import spainImg from "../assets/Stock photos/Spain.jpg";
+import southAfricaImg from "../assets/Stock photos/South Africa.jpg";
+import franceImg from "../assets/Stock photos/France.jpg";
+import maldivesImg from "../assets/Stock photos/Maldives.jpg";
+import malaysiaImg from "../assets/Stock photos/Malaysia.jpg";
+import italyImg from "../assets/Stock photos/Italy.jpg";
+import netherlandsImg from "../assets/Stock photos/Netherland.jpg";
+import australiaImg from "../assets/Stock photos/Australia.png";
+import vietnamImg from "../assets/Stock photos/Vietnam.jpg";
 import baliImg from "../assets/Stock photos/bali.jpeg";
-
-// ── DUBAI ──
 import dubaiImg from "../assets/Stock photos/dubai.jpeg";
 
-// ── NORTHERN LIGHTS ──
-import northernLightsImg from "../assets/Stock photos/Northern Lights, Finland/jonatan-pie-EvKBHBGgaUo-unsplash.jpg";
-
-// ── HONG KONG ──
+// Subfolder images
 import hongkongImg from "../assets/Stock photos/Hong Kong/pexels-apasaric-2484847.jpg";
-
-// ── JAPAN ──
+import greeceImg from "../assets/Stock photos/Greece/Santorini/pexels-jimmy-teoh-294331-1010650.jpg";
 import japanImg from "../assets/Stock photos/Japan/pexels-satoshi-1325837.jpg";
-
-// ── MAURITIUS ──
+import almatyImg from "../assets/Stock photos/Almaty/visit-almaty-wN4D-mVR7fE-unsplash.jpg";
+import northernLightsImg from "../assets/Stock photos/Northern Lights, Finland/jonatan-pie-EvKBHBGgaUo-unsplash.jpg";
 import mauritiusImg from "../assets/Stock photos/Mauritius/pexels-asadphoto-1591374.jpg";
-
-// ── SINGAPORE ──
 import singaporeImg from "../assets/Stock photos/Singapore/pexels-roamingfreev-9164196.jpg";
 
-// ── GREECE ──
-import greeceImg from "../assets/Stock photos/Greece/Santorini/pexels-jimmy-teoh-294331-1010650.jpg";
-
-// ─── CLEAN MAPPING SYSTEM ────────────────────────────────────────────────────
-// Mapping from destination name -> image variable as requested.
+// ─── STRICT IMAGE MAPPING OBJECT ─────────────────────────────────────────────
+// Mapping as requested: name -> image variable.
 
 export const destinationImages = {
-    "Almaty": almatyImg,
+    "United States of America": usaImg,
+    "United Kingdom": ukImg,
+    "Turkey": turkeyImg,
+    "Thailand": thailandImg,
+    "Switzerland": switzerlandImg,
+    "Spain": spainImg,
+    "South Africa": southAfricaImg,
+    "France": franceImg,
+    "Maldives": maldivesImg,
+    "Malaysia": malaysiaImg,
+    "Italy": italyImg,
+    "Netherlands": netherlandsImg,
+    "Australia": australiaImg,
     "Bali": baliImg,
     "Dubai": dubaiImg,
-    "Northern Lights": northernLightsImg,
-    "Japan": japanImg,
+    "Vietnam": vietnamImg,
     "Hong Kong": hongkongImg,
-    "Mauritius": mauritiusImg,
-    "Singapore": singaporeImg,
     "Greece": greeceImg,
-    // Add destinations that don't have folders as needed
-    "Malaysia": null, 
-    "Italy": null,
-    "Australia": null,
-    "Netherlands": null
+    "Japan": japanImg,
+    "Almaty": almatyImg,
+    "Northern Lights": northernLightsImg,
+    "Mauritius": mauritiusImg,
+    "Singapore": singaporeImg
 };
 
-// ─── LEGACY EXPORT MAP (for components using old stockImages structure) ───────
-// We keep this temporarily during transition
+// ─── LEGACY EXPORT MAP ───────────────────────────────────────────────────────
+// Maintaining this for basic compatibility
 
 const stockImages = {
-    almaty: { hero: almatyImg, card: almatyImg, gallery: [almatyImg] },
-    bali: { hero: baliImg, card: baliImg, gallery: [baliImg] },
-    dubai: { hero: dubaiImg, card: dubaiImg, gallery: [dubaiImg] },
-    "northern-lights": { hero: northernLightsImg, card: northernLightsImg, gallery: [northernLightsImg] },
-    hongkong: { hero: hongkongImg, card: hongkongImg, gallery: [] },
-    "hong-kong": { hero: hongkongImg, card: hongkongImg, gallery: [] },
-    japan: { hero: japanImg, card: japanImg, gallery: [japanImg] },
-    mauritius: { hero: mauritiusImg, card: mauritiusImg, gallery: [mauritiusImg] },
-    singapore: { hero: singaporeImg, card: singaporeImg, gallery: [singaporeImg] },
-    greece: { hero: greeceImg, card: greeceImg, gallery: [greeceImg] },
-    malaysia: { hero: null, card: null, gallery: [] },
+    almaty: { hero: almatyImg, card: almatyImg },
+    bali: { hero: baliImg, card: baliImg },
+    dubai: { hero: dubaiImg, card: dubaiImg },
+    japan: { hero: japanImg, card: japanImg },
+    greece: { hero: greeceImg, card: greeceImg },
+    hongkong: { hero: hongkongImg, card: hongkongImg },
 };
 
 export default stockImages;

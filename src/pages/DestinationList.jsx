@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import stockImages from "../data/stockImages";
+import { destinationImages } from "../data/stockImages";
 
 const COLORS = {
   primary: "#1E3A8A",
@@ -13,9 +13,9 @@ const COLORS = {
 const destinations = [
   { name: "Almaty", country: "Kazakhstan" },
   { name: "Australia", country: "Australia" },
-  { name: "Netherlands", country: "Netherlands" },
+  { name: "Netherland", country: "Netherlands" },
   { name: "Bali", country: "Indonesia" },
-  { name: "United Arab Emirates", country: "UAE" },
+  { name: "Dubai", country: "UAE" },
   { name: "Greece", country: "Greece" },
   { name: "Hong Kong", country: "Hong Kong" },
   { name: "Italy", country: "Italy" },
@@ -161,7 +161,7 @@ export default function DestinationList() {
       {/* ── HERO ── */}
       <section className="dest-hero">
         <img
-          src={stockImages.dubai.hero}
+          src={destinationImages["Dubai"]}
           alt="Destinations"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.8 }}
         />
@@ -190,13 +190,8 @@ export default function DestinationList() {
       <section style={{ padding: "0 5vw 100px" }}>
         <div className="destinations-grid">
           {destinations.map((item, index) => {
-            let slug = item.name.toLowerCase().replace(/\s/g, "-");
-            // Mapping correct stock keys
-            if (slug.includes("emirates") || slug === "uae") slug = "dubai";
-            if (slug.includes("lights")) slug = "northern-lights";
-            
-            const key = slug === "hong-kong" ? "hong-kong" : slug;
-            const imgSrc = stockImages[key]?.card || stockImages[key]?.hero || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
+            const imgSrc = destinationImages[item.name];
+            const slug = item.name.toLowerCase().replace(/\s/g, "-");
 
             return (
               <div

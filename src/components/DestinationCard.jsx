@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { destinationImages } from "../data/stockImages";
 
 const COLORS = {
     primary: "#1E3A8A",
@@ -19,6 +20,8 @@ export default function DestinationCard({ destination, offset }) {
     const blur = Math.min(absOffset * 4, 10);
     const opacity = Math.max(0.35, 1 - absOffset * 0.3);
     const zIndex = Math.round(100 - absOffset * 10);
+
+    const cardImage = destinationImages[destination.name];
 
     return (
         <motion.div
@@ -43,7 +46,7 @@ export default function DestinationCard({ destination, offset }) {
             >
                 {/* Image */}
                 <img
-                    src={destination.cardImg}
+                    src={cardImage}
                     alt={destination.name}
                     loading="lazy"
                     className="w-full h-full object-cover"

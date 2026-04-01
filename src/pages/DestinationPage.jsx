@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import destinations from "../data/destinations";
 import PackageCard from "../components/PackageCard";
 import { Calendar, MapPin } from "lucide-react";
+import { destinationImages } from "../data/stockImages";
 
 const COLORS = {
     primary: "#1E3A8A",
@@ -51,6 +52,8 @@ export default function DestinationPage() {
         );
     }
 
+    const heroImg = destinationImages[destination.name];
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -61,7 +64,7 @@ export default function DestinationPage() {
             {/* ── HERO ── */}
             <div className="relative overflow-hidden" style={{ height: "100vh", minHeight: 560 }}>
                 <img
-                    src={destination.heroImg}
+                    src={heroImg}
                     alt={destination.name}
                     className="w-full h-full object-cover"
                 />

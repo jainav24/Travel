@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import destinations from "../data/destinations";
-import stockImages from "../data/stockImages";
+import { destinationImages } from "../data/stockImages";
 import { Search } from "lucide-react";
 
 const COLORS = {
@@ -21,10 +21,9 @@ const DestinationGridCard = ({ dest, index, visible }) => {
     const navigate = useNavigate();
     const [hovered, setHovered] = useState(false);
 
-    // Image logic: use stockImages if available, fallback to dest.cardImg
+    // Image logic: use strict mapping
     const getDestImage = () => {
-        const key = dest.slug === "hong-kong" ? "hong-kong" : dest.slug;
-        return stockImages[key]?.card || dest.cardImg || dest.heroImg;
+        return destinationImages[dest.name];
     };
 
     return (
@@ -140,7 +139,7 @@ export default function DestinationsPage() {
             {/* ── HERO ── */}
             <section style={{ position: "relative", height: "55vh", minHeight: 460, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 60 }}>
                 <img
-                    src={stockImages.dubai.hero}
+                    src={destinationImages["Dubai"]}
                     alt="All Destinations"
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                 />

@@ -40,14 +40,19 @@ const DESTINATION_FLAGS_SVG = {
     "Vietnam": ["vn"]
 };
 
-export default function DestinationCard({ destination, offset }) {
+export default function DestinationCard({ destination, offset, isDragging }) {
     const navigate = useNavigate();
     const absOffset = Math.abs(offset);
     const isCenter = absOffset < 0.5;
-
-    const scale = Math.max(0.78, 1 - absOffset * 0.1);
-    const blur = Math.min(absOffset * 4, 10);
-    const opacity = Math.max(0.35, 1 - absOffset * 0.3);
+    const limitOffset = Math.max(-2.5, Math.min(2.5, offset));
+    
+    // 3D Coverflow Physics calculations
+    const rotateY = limitOffset * -40;       // Angle items to create perfect cylindrical curvature
+    const translateX = offset * 220;         // Absolutely position items radially outwards!
+    const translateZ = absOffset * -180;     // Push adjacent slides deeply into the z-plane
+    const scale = Math.max(0.65, 1 - absOffset * 0.18); // Maintain slight 2D scale down naturally
+    const blur = Math.min(absOffset * 1.5, 6); // Very gentle background blur focus
+    const opacity = Math.max(0.4, 1 - absOffset * 0.25);
     const zIndex = Math.round(100 - absOffset * 10);
 
     const [hovered, setHovered] = React.useState(false);
@@ -58,10 +63,19 @@ export default function DestinationCard({ destination, offset }) {
             onClick={() => navigate(`/destination/${destination.slug}`)}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            animate={{ scale, opacity, filter: `blur(${blur}px)` }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            whileHover={isCenter ? { scale: 1.03 } : {}}
-            style={{ zIndex, flexShrink: 0, cursor: "pointer", willChange: "transform, opacity, filter" }}
+            animate={{ x: translateX, scale, opacity, filter: `blur(${blur}px)`, rotateY, z: translateZ }}
+            transition={isDragging ? { duration: 0 } : { type: "spring", stiffness: 250, damping: 28 }}
+            whileHover={isCenter ? { scale: 1.02, rotateY: 0 } : {}}
+            style={{ 
+                position: "absolute",
+                left: "50%",
+                marginLeft: "clamp(-170px, -13vw, -110px)",
+                zIndex, 
+                flexShrink: 0, 
+                cursor: isDragging ? "grabbing" : "pointer", 
+                willChange: "transform, opacity, filter, rotateY, z", 
+                transformStyle: "preserve-3d" 
+            }}
             className="destination-card-wrapper"
         >
             <style>{`
@@ -123,42 +137,33 @@ export default function DestinationCard({ destination, offset }) {
                     transition: "opacity 0.4s",
                 }} />
 
-                {/* Content */}
+                {/* Content - Emulating the strong typographic block of the reference image */}
                 <div
                     className="dest-card-content"
                     style={{
                         position: "absolute",
-                        bottom: 32,
-                        left: 28,
-                        right: 28,
+                        bottom: 36,
+                        left: 32,
+                        right: 32,
                         zIndex: 2,
+                        transform: isCenter ? "translateZ(30px)" : "translateZ(0)", // Pops Text subtly outward!
+                        transition: "transform 0.4s ease"
                     }}
                 >
-                    <div
-                        style={{
-                            fontFamily: "'Montserrat', sans-serif",
-                            fontSize: 10,
-                            color: COLORS.secondary,
-                            fontWeight: 700,
-                            letterSpacing: 2.5,
-                            textTransform: "uppercase",
-                            marginBottom: 8,
-                            opacity: isCenter ? 1 : 0.8,
-                        }}
-                    >
-                        {destination.country}
-                    </div>
                     <h3
                         style={{
-                            fontFamily: "'Cormorant Garamond', serif",
-                            fontSize: "clamp(24px, 2.8vw, 36px)",
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontSize: "clamp(20px, 2.2vw, 28px)",
                             color: "#fff",
-                            fontWeight: 700,
-                            margin: "0 0 12px 0",
+                            fontWeight: 800,
+                            margin: "0 0 8px 0",
                             lineHeight: 1.1,
+                            textTransform: "uppercase",
+                            letterSpacing: "0.02em",
                             display: "flex",
                             alignItems: "center",
-                            flexWrap: "nowrap"
+                            flexWrap: "wrap",
+                            gap: "8px"
                         }}
                     >
                         {destination.name}
@@ -183,14 +188,31 @@ export default function DestinationCard({ destination, offset }) {
                     <div
                         style={{
                             fontFamily: "'Montserrat', sans-serif",
+                            fontSize: 12,
+                            color: "rgba(255,255,255,0.7)",
+                            fontWeight: 500,
+                            letterSpacing: 0.5,
+                            marginBottom: 16,
+                            opacity: isCenter ? 1 : 0.8,
+                        }}
+                    >
+                        {destination.tagline}
+                    </div>
+                    
+                    <div
+                        style={{
+                            fontFamily: "'Montserrat', sans-serif",
                             fontSize: 11,
                             color: "#fff",
-                            fontWeight: 600,
-                            letterSpacing: 1.5,
+                            fontWeight: 700,
+                            letterSpacing: 2,
                             textTransform: "uppercase",
                             display: "flex",
                             alignItems: "center",
                             gap: 8,
+                            opacity: isCenter ? 1 : 0,
+                            pointerEvents: isCenter ? "auto" : "none",
+                            transition: "opacity 0.3s ease"
                         }}
                     >
                         Explore <span style={{ transition: "transform 0.3s", transform: hovered ? "translateX(4px)" : "none" }}>&rarr;</span>

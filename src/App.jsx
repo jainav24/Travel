@@ -18,6 +18,16 @@ import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import destinations from "./data/destinations";
 import stockImages, { destinationImages, whyChooseImages, galleryImages } from "./data/stockImages";
 
+// ─── HERO SECTION IMAGES ───────────────────────────────────────────────────
+import heroBali from "./assets/Stock Photos/HeroSectionImages/Bali.jpg";
+import heroDubai from "./assets/Stock Photos/HeroSectionImages/Dubai.jpg";
+import heroItaly from "./assets/Stock Photos/HeroSectionImages/Italy (1).jpg";
+import heroNorthernLights from "./assets/Stock Photos/HeroSectionImages/Northern lights .jpg";
+import heroSpain from "./assets/Stock Photos/HeroSectionImages/Spain (1).jpg";
+import heroSwitzerland from "./assets/Stock Photos/HeroSectionImages/Switzerland (1).jpg";
+import heroThailand from "./assets/Stock Photos/HeroSectionImages/Thailand.jpg";
+import heroVietnam from "./assets/Stock Photos/HeroSectionImages/Vietnam (1).jpg";
+
 // ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
 
 const COLORS = {
@@ -56,11 +66,14 @@ const testimonials = [
 ];
 
 const heroDestinations = [
-  { name: "Bali", country: "Indonesia", tagline: "Island of the Gods", img: destinationImages["Bali"], slug: "bali" },
-  { name: "Dubai", country: "UAE", tagline: "City of Gold & Grandeur", img: destinationImages["Dubai"], slug: "dubai" },
-  { name: "Northern Lights", country: "Scandinavia", tagline: "Nature's Greatest Light Show", img: destinationImages["Northern Lights"], slug: "northern-lights" },
-  { name: "Japan", country: "Japan", tagline: "Where Tradition Meets Tomorrow", img: destinationImages["Japan"], slug: "japan" },
-  { name: "Greece", country: "Greece", tagline: "Sunsets Over the Aegean", img: destinationImages["Greece"], slug: "greece" },
+  { name: "Bali", country: "Indonesia", tagline: "Island of the Gods", img: heroBali, slug: "bali" },
+  { name: "Dubai", country: "UAE", tagline: "City of Gold & Grandeur", img: heroDubai, slug: "dubai" },
+  { name: "Italy", country: "Italy", tagline: "Heart of the Renaissance", img: heroItaly, slug: "italy" },
+  { name: "Northern Lights", country: "Scandinavia", tagline: "Nature's Greatest Light Show", img: heroNorthernLights, slug: "northern-lights" },
+  { name: "Spain", country: "Spain", tagline: "Passion and History", img: heroSpain, slug: "spain" },
+  { name: "Switzerland", country: "Switzerland", tagline: "Alpine Wonderland", img: heroSwitzerland, slug: "switzerland" },
+  { name: "Thailand", country: "Thailand", tagline: "The Land of Smiles", img: heroThailand, slug: "thailand" },
+  { name: "Vietnam", country: "Vietnam", tagline: "Timeless Charm", img: heroVietnam, slug: "vietnam" },
 ];
 
 // ─── UTILS ───────────────────────────────────────────────────────────────────
@@ -189,32 +202,32 @@ const priceRanges = [
 ];
 
 const DESTINATION_FLAGS_SVG = {
-    "Almaty": ["kz"],
-    "Australia": ["au"],
-    "Netherland": ["nl"],
-    "Netherlands": ["nl"],
-    "Bali": ["id"],
-    "Dubai": ["ae"],
-    "United Arab Emirates": ["ae"],
-    "Greece": ["gr"],
-    "Hong Kong": ["hk"],
-    "Italy": ["it"],
-    "Japan": ["jp"],
-    "Malaysia": ["my"],
-    "Mauritius": ["mu"],
-    "Maldives": ["mv"],
-    "Northern lights": ["fi", "no", "is"],
-    "Northern Lights": ["fi", "no", "is"],
-    "France": ["fr"],
-    "Singapore": ["sg"],
-    "South Africa": ["za"],
-    "Spain": ["es"],
-    "Switzerland": ["ch"],
-    "Thailand": ["th"],
-    "Turkey": ["tr"],
-    "United Kingdom": ["gb"],
-    "United States of America": ["us"],
-    "Vietnam": ["vn"]
+  "Almaty": ["kz"],
+  "Australia": ["au"],
+  "Netherland": ["nl"],
+  "Netherlands": ["nl"],
+  "Bali": ["id"],
+  "Dubai": ["ae"],
+  "United Arab Emirates": ["ae"],
+  "Greece": ["gr"],
+  "Hong Kong": ["hk"],
+  "Italy": ["it"],
+  "Japan": ["jp"],
+  "Malaysia": ["my"],
+  "Mauritius": ["mu"],
+  "Maldives": ["mv"],
+  "Northern lights": ["fi", "no", "is"],
+  "Northern Lights": ["fi", "no", "is"],
+  "France": ["fr"],
+  "Singapore": ["sg"],
+  "South Africa": ["za"],
+  "Spain": ["es"],
+  "Switzerland": ["ch"],
+  "Thailand": ["th"],
+  "Turkey": ["tr"],
+  "United Kingdom": ["gb"],
+  "United States of America": ["us"],
+  "Vietnam": ["vn"]
 };
 
 const NAV_DESTINATIONS = [
@@ -373,7 +386,7 @@ function Navbar() {
           <div
             onMouseEnter={() => { clearTimeout(destTimeout.current); setDestOpen(true); }}
             onMouseLeave={() => { destTimeout.current = setTimeout(() => setDestOpen(false), 180); }}
-            style={{ position: "static" }}
+            style={{ position: "relative" }}
           >
             <Link to="/destinations" className="nav-link-hover" style={{
               color: destOpen ? COLORS.secondary : baseLinkColor,
@@ -388,13 +401,127 @@ function Navbar() {
                 <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
+
+            <AnimatePresence>
+              {destOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15, x: "-50%", scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
+                  exit={{ opacity: 0, y: 10, x: "-50%", scale: 0.96 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  onMouseEnter={() => {
+                    clearTimeout(destTimeout.current);
+                    setDestOpen(true);
+                  }}
+                  onMouseLeave={() => {
+                    destTimeout.current = setTimeout(() => setDestOpen(false), 200);
+                  }}
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: "50%",
+                    marginTop: 12,
+                    width: 300,
+                    background: COLORS.primary,
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                    borderRadius: 16,
+                    zIndex: 300,
+                    padding: "24px",
+                    border: "1px solid rgba(0,0,0,0.05)",
+                  }}
+                >
+
+                  <h4
+                    style={{
+                      fontSize: 10,
+                      letterSpacing: 2,
+                      color: "rgba(255,255,255,0.7)",
+                      fontWeight: 700,
+                      textTransform: "uppercase",
+                      marginBottom: 20,
+                      opacity: 0.8,
+                    }}
+                  >
+                    Popular Destinations
+                  </h4>
+
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                    {NAV_DESTINATIONS.slice(0, 7).map((item) => (
+                      <Link
+                        key={item.slug}
+                        to={`/destination/${item.slug}`}
+                        onClick={() => setDestOpen(false)}
+                        className="mega-nav-link-premium"
+                        style={{
+                          color: "#fff",
+                          textDecoration: "none",
+                          fontSize: 15,
+                          fontFamily: "'Montserrat', sans-serif",
+                          fontWeight: 500,
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          padding: "6px 0",
+                        }}
+                      >
+                        {item.name}
+
+                        {DESTINATION_FLAGS_SVG[item.name] && (
+                          <div style={{ display: "flex", gap: 4 }}>
+                            {DESTINATION_FLAGS_SVG[item.name].map((code) => (
+                              <img
+                                key={code}
+                                src={`https://flagcdn.com/${code}.svg`}
+                                alt=""
+                                style={{
+                                  width: 14,
+                                  borderRadius: 2,
+                                  opacity: 0.9,
+                                }}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
+
+
+                  <div
+                    style={{
+                      marginTop: 20,
+                      paddingTop: 16,
+                      borderTop: "1px solid rgba(255,255,255,0.15)",
+                      textAlign: "right",
+                    }}
+                  >
+                    <Link
+                      to="/destinations"
+                      onClick={() => setDestOpen(false)}
+                      style={{
+                        color: "#fff",
+                        fontWeight: 700,
+                        fontSize: 12,
+                        textDecoration: "none",
+                        letterSpacing: 1.5,
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      View All →
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
           </div>
 
           {/* HOLIDAY PACKAGES TRIGGER */}
           <div
             onMouseEnter={() => { clearTimeout(pkgTimeout.current); setPkgOpen(true); }}
             onMouseLeave={() => { pkgTimeout.current = setTimeout(() => setPkgOpen(false), 180); }}
-            style={{ position: "static" }}
+            style={{ position: "relative" }}
           >
             <span className="nav-link-hover" style={{
               color: pkgOpen ? COLORS.secondary : baseLinkColor,
@@ -409,6 +536,76 @@ function Navbar() {
                 <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
+
+            <AnimatePresence>
+              {pkgOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15, x: "-50%", scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
+                  exit={{ opacity: 0, y: 10, x: "-50%", scale: 0.96 }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: "50%",
+                    marginTop: 12,
+                    width: 250,
+                    background: COLORS.primary,
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                    borderRadius: 16,
+                    zIndex: 300,
+                    padding: "24px",
+                    border: "1px solid rgba(255,255,255,0.05)",
+                  }}
+                >
+                  {/* FAMILY PACKAGES */}
+                  <div style={{ marginBottom: 20 }}>
+                    <h4 style={{ fontSize: 10, letterSpacing: 2, color: "rgba(255,255,255,0.7)", fontWeight: 700, textTransform: "uppercase", marginBottom: 12, opacity: 0.8 }}>
+                      Family Packages
+                    </h4>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      {priceRanges.map((pr) => (
+                        <Link
+                          key={"fam_" + pr.path}
+                          to={pr.path}
+                          onClick={() => setPkgOpen(false)}
+                          className="mega-nav-link-premium"
+                          style={{
+                            color: "#fff", textDecoration: "none", fontSize: 13, fontFamily: "'Montserrat', sans-serif",
+                            fontWeight: 500, padding: "4px 0", transition: "all 0.2s", display: "block"
+                          }}
+                        >
+                          {pr.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* ADVENTURE PACKAGES */}
+                  <div style={{ paddingTop: 20, borderTop: "1px solid rgba(255,255,255,0.15)" }}>
+                    <h4 style={{ fontSize: 10, letterSpacing: 2, color: "rgba(255,255,255,0.7)", fontWeight: 700, textTransform: "uppercase", marginBottom: 12, opacity: 0.8 }}>
+                      Adventure Packages
+                    </h4>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      {priceRanges.map((pr) => (
+                        <Link
+                          key={"adv_" + pr.path}
+                          to={pr.path}
+                          onClick={() => setPkgOpen(false)}
+                          className="mega-nav-link-premium"
+                          style={{
+                            color: "#fff", textDecoration: "none", fontSize: 13, fontFamily: "'Montserrat', sans-serif",
+                            fontWeight: 500, padding: "4px 0", transition: "all 0.2s", display: "block"
+                          }}
+                        >
+                          {pr.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <Link to="/about" className="nav-link-hover" style={{
@@ -430,166 +627,9 @@ function Navbar() {
 
       {/* ─── MEGA DROPDOWN PANELS ─── */}
 
-      {/* DESTINATIONS MEGA DROPDOWN */}
-      <AnimatePresence>
-        {destOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-            onMouseEnter={() => { clearTimeout(destTimeout.current); setDestOpen(true); }}
-            onMouseLeave={() => { destTimeout.current = setTimeout(() => setDestOpen(false), 200); }}
-            style={{
-              position: "absolute", top: NAV_HEIGHT, left: "5%", right: "5%",
-              maxWidth: 1100, margin: "0 auto",
-              background: "#fff",
-              boxShadow: "0 25px 50px -12px rgba(0,0,0,0.12)",
-              borderRadius: 20,
-              zIndex: 300,
-              padding: "40px",
-              border: "1px solid rgba(0,0,0,0.04)",
-            }}
-          >
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 0 }}>
-              {[
-                {
-                  title: "Popular Destinations",
-                  items: [NAV_DESTINATIONS[0], NAV_DESTINATIONS[1], NAV_DESTINATIONS[2], NAV_DESTINATIONS[3]]
-                },
-                {
-                  title: "Adventure & Nature",
-                  items: [NAV_DESTINATIONS[4], NAV_DESTINATIONS[6], NAV_DESTINATIONS[7], NAV_DESTINATIONS[5]]
-                },
-                {
-                  title: "Luxury & Culture",
-                  items: [NAV_DESTINATIONS[8], NAV_DESTINATIONS[9], NAV_DESTINATIONS[10], NAV_DESTINATIONS[11]]
-                }
-              ].map((col, idx) => (
-                <div key={idx} style={{
-                  padding: "0 40px",
-                  borderRight: idx < 2 ? "1px solid rgba(0,0,0,0.06)" : "none"
-                }}>
-                  <h4 style={{
-                    fontSize: 10, letterSpacing: 2, color: COLORS.muted, fontWeight: 700,
-                    textTransform: "uppercase", marginBottom: 24, opacity: 0.8
-                  }}>
-                    {col.title}
-                  </h4>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                    {col.items.map((item) => (
-                      <Link
-                        key={item.slug}
-                        to={`/destination/${item.slug}`}
-                        onClick={() => setDestOpen(false)}
-                        className="mega-nav-link-premium"
-                        style={{
-                          color: COLORS.dark, textDecoration: "none", fontSize: 14,
-                          fontFamily: "'Montserrat', sans-serif", fontWeight: 500,
-                          transition: "all 0.2s", display: "flex", justifyContent: "space-between", alignItems: "center",
-                          padding: "4px 0", gap: 8
-                        }}
-                      >
-                        {item.name}
-                        {DESTINATION_FLAGS_SVG[item.name] && (
-                          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                            {DESTINATION_FLAGS_SVG[item.name].map(code => (
-                              <img key={code} src={`https://flagcdn.com/${code}.svg`} alt="" style={{ width: 14, height: "auto", opacity: 0.9, borderRadius: 2 }} className="nav-flag-svg" />
-                            ))}
-                          </div>
-                        )}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+      {/* (Destinations Dropdown moved inside desktop-nav) */}
 
-            {/* View All System — BOTTOM RIGHT corner */}
-            <div style={{
-              marginTop: 40, paddingTop: 24, borderTop: "1px solid rgba(0,0,0,0.06)",
-              display: "flex", justifyContent: "flex-end"
-            }}>
-              <Link
-                to="/destinations"
-                onClick={() => setDestOpen(false)}
-                style={{
-                  color: COLORS.secondary, fontWeight: 700, fontSize: 13, textDecoration: "none",
-                  fontFamily: "'Montserrat', sans-serif", textTransform: "uppercase", letterSpacing: 2,
-                  display: "flex", alignItems: "center", gap: 8,
-                  transition: "all 0.3s"
-                }}
-                className="view-all-link-premium"
-              >
-                View All Destinations <span style={{ fontSize: 18 }}>→</span>
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* HOLIDAY PACKAGES MEGA DROPDOWN */}
-      <AnimatePresence>
-        {pkgOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-            onMouseEnter={() => { clearTimeout(pkgTimeout.current); setPkgOpen(true); }}
-            onMouseLeave={() => { pkgTimeout.current = setTimeout(() => setPkgOpen(false), 200); }}
-            style={{
-              position: "absolute", top: NAV_HEIGHT, left: "5%", right: "5%",
-              maxWidth: 1100, margin: "0 auto",
-              background: "#fff",
-              boxShadow: "0 25px 50px -12px rgba(0,0,0,0.12)",
-              borderRadius: 20,
-              zIndex: 300,
-              padding: "40px",
-              border: "1px solid rgba(0,0,0,0.04)",
-            }}
-          >
-            <div style={{ textAlign: "center", marginBottom: 32 }}>
-              <h4 style={{
-                fontSize: 12, letterSpacing: 2, color: COLORS.primary, fontWeight: 700,
-                textTransform: "uppercase", margin: 0, opacity: 0.9
-              }}>
-                International Packages
-              </h4>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 0 }}>
-              {[
-                { items: priceRanges.slice(0, 3) },
-                { items: priceRanges.slice(3, 5) }
-              ].map((col, idx) => (
-                <div key={idx} style={{
-                  padding: "0 40px",
-                  borderRight: idx < 1 ? "1px solid rgba(0,0,0,0.06)" : "none"
-                }}>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                    {col.items.map((pr) => (
-                      <Link
-                        key={pr.path}
-                        to={pr.path}
-                        onClick={() => setPkgOpen(false)}
-                        className="mega-nav-link-premium"
-                        style={{
-                          color: COLORS.dark, textDecoration: "none", fontSize: 14,
-                          fontFamily: "'Montserrat', sans-serif", fontWeight: 500,
-                          transition: "all 0.2s", display: "block",
-                          padding: "4px 0"
-                        }}
-                      >
-                        {pr.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* (Holiday Packages Dropdown moved inside desktop-nav) */}
 
       {/* Mobile Menu */}
       {menuOpen && (
@@ -793,140 +833,227 @@ function HeroDestinations() {
 
   useEffect(() => {
     const t = setInterval(() => {
-      setFade(false);
-      setTimeout(() => { setSlide(s => (s + 1) % heroDestinations.length); setFade(true); }, 600);
-    }, 5000);
+      goToNext();
+    }, 6000); // slightly longer pause to enjoy the design
     return () => clearInterval(t);
-  }, []);
+  }, [slide]);
+
+  const goToPrev = () => {
+    setFade(false);
+    setTimeout(() => { setSlide(s => (s - 1 + heroDestinations.length) % heroDestinations.length); setFade(true); }, 400);
+  };
+
+  const goToNext = () => {
+    setFade(false);
+    setTimeout(() => { setSlide(s => (s + 1) % heroDestinations.length); setFade(true); }, 400);
+  };
 
   const goToSlide = (i) => {
     if (i === slide) return;
     setFade(false);
-    setTimeout(() => { setSlide(i); setFade(true); }, 300);
+    setTimeout(() => { setSlide(i); setFade(true); }, 400);
   };
 
   const d = heroDestinations[slide];
 
+  // The active and upcoming destinations for the cards
+  const nextDestinations = [
+    heroDestinations[slide],
+    heroDestinations[(slide + 1) % heroDestinations.length],
+    heroDestinations[(slide + 2) % heroDestinations.length],
+  ];
+
   return (
-    <section style={{ position: "relative", height: "100vh", minHeight: 650, overflow: "hidden" }}>
-      {/* Current slide bg */}
-      <div style={{ position: "absolute", inset: 0, transition: "opacity 0.8s ease", opacity: fade ? 1 : 0 }}>
-        <img src={d.img} alt={d.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} loading="eager" />
+    <section style={{ position: "relative", height: "100vh", minHeight: 650, display: "flex", alignItems: "center", background: "#050B14", overflow: "hidden" }}>
+      {/* Current slide bg (Full Bleed) */}
+      <div style={{ position: "absolute", inset: 0, transition: "opacity 0.8s ease-in-out", opacity: fade ? 1 : 0 }}>
+        <img src={d.img} alt={d.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", filter: "blur(6px)", transform: "scale(1.05)" }} loading="eager" />
       </div>
 
-      {/* Gradient overlay */}
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.1) 100%)" }} />
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(0,0,0,0.45) 100%)" }} />
+      {/* Gradient overlays to replicate the moody contrast of the reference */}
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%)", transition: "opacity 0.5s" }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, transparent 60%, rgba(0,0,0,0.6) 100%)", transition: "opacity 0.5s" }} />
 
-      {/* Slide content — CENTER ALIGNED ON MOBILE, LEFT ON DESKTOP */}
-      <div className="hero-content" style={{
-        position: "relative", zIndex: 4, height: "100%", display: "flex",
-        flexDirection: "column", alignItems: "flex-start", justifyContent: "center",
-        textAlign: "left", padding: "0 8vw",
-      }}>
-        <div style={{
-          fontSize: 11,
-          letterSpacing: 10,
-          color: COLORS.secondary,
-          fontFamily: "'Montserrat', sans-serif",
-          fontWeight: 800,
-          marginBottom: 18,
-          textTransform: "uppercase",
-          opacity: fade ? 1 : 0,
-          transform: fade ? "translateY(0)" : "translateY(30px)",
-          transition: "opacity 0.6s ease, transform 0.6s ease",
-          transitionDelay: "0.1s",
-        }}>
-          ✦ {d.country} ✦
+      {/* Vertical Pagination Indicator (Left Edge) */}
+      <div style={{ position: "absolute", left: "2vw", top: "50%", transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 24, zIndex: 10 }}>
+        <div style={{ width: 1, height: 60, background: "rgba(255,255,255,0.2)" }} />
+        <div style={{ fontSize: 12, fontFamily: "'Montserrat', sans-serif", fontWeight: 700, color: "#fff", transform: "rotate(-90deg)", whiteSpace: "nowrap", letterSpacing: 2 }}>
+          {String(slide + 1).padStart(2, "0")} <span style={{ opacity: 0.3, margin: "0 8px" }}>—</span> <span style={{ opacity: 0.6 }}>{String(heroDestinations.length).padStart(2, "0")}</span>
+        </div>
+        <div style={{ width: 1, height: 60, background: "rgba(255,255,255,0.2)" }} />
+      </div>
+
+      {/* Main Content Container: Split layout */}
+      <div style={{ position: "relative", zIndex: 5, width: "100%", padding: "0 4vw 0 8vw", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        
+        {/* Left Side: Text Content */}
+        <div style={{ flex: "0 0 45%" }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slide}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <h1 style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "clamp(36px, 5vw, 68px)",
+                color: "#fff",
+                fontWeight: 800,
+                lineHeight: 1.1,
+                textTransform: "uppercase",
+                letterSpacing: "-0.01em",
+                margin: "0 0 16px 0",
+              }}>
+                {d.name}
+              </h1>
+              
+              <p style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: "14px",
+                color: "rgba(255,255,255,0.85)",
+                lineHeight: 1.7,
+                marginBottom: 36,
+                maxWidth: 440,
+                letterSpacing: "0.01em",
+              }}>
+                As a breathtaking destination in the world, {d.name} is blessed with so many different cultures, traditions, vistas, and history. {d.tagline}. Discover an ecosystem that makes it an unforgettable journey.
+              </p>
+
+              <button
+                onClick={() => navigate(`/destination/${d.slug}`)}
+                style={{
+                  background: COLORS.primaryLight,
+                  color: "#fff", border: "none", padding: "14px 32px", borderRadius: 12,
+                  fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 700,
+                  display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
+                  boxShadow: "0 8px 24px rgba(59,130,246,0.25)",
+                  transition: "transform 0.3s, background 0.3s, box-shadow 0.3s",
+                }}
+                onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.background = COLORS.primary; e.currentTarget.style.boxShadow = "0 12px 30px rgba(59,130,246,0.35)"; }}
+                onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = COLORS.primaryLight; e.currentTarget.style.boxShadow = "0 8px 24px rgba(59,130,246,0.25)"; }}
+              >
+                Explore
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        <h1 style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontSize: "clamp(64px, 11vw, 150px)",
-          color: "#fff",
-          lineHeight: 0.9,
-          fontWeight: 600,
-          letterSpacing: "-0.03em",
-          marginBottom: 16,
-          textShadow: "0 0 60px rgba(0,0,0,0.5), 0 4px 20px rgba(0,0,0,0.4)",
-          opacity: fade ? 1 : 0,
-          transform: fade ? "translateY(0)" : "translateY(40px)",
-          transition: "opacity 0.7s ease, transform 0.7s ease",
-          transitionDelay: "0.2s",
-        }}>
-          {d.name}
-        </h1>
+        {/* Right Side: Cards Carousel */}
+        <div style={{ flex: "0 0 50%", display: "flex", alignItems: "center", gap: 20 }}>
+          <AnimatePresence mode="popLayout">
+            {nextDestinations.map((nextDest, idx) => (
+              <motion.div
+                key={nextDest.slug + "_" + idx + "_" + slide} // ensure remount to trigger re-anim
+                initial={{ opacity: 0, x: 50, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -50, scale: 0.95 }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
+                style={{
+                  flexShrink: 0,
+                  width: idx === 0 ? 250 : 220,
+                  height: idx === 0 ? 360 : 320,
+                  position: "relative",
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  boxShadow: idx === 0 ? "0 20px 40px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.8)" : "0 10px 20px rgba(0,0,0,0.2)",
+                  opacity: idx === 2 ? 0.4 : (idx === 1 ? 0.8 : 1),
+                  cursor: "pointer",
+                  transition: "opacity 0.3s, transform 0.3s",
+                }}
+                onClick={() => navigate(`/destination/${nextDest.slug}`)}
+                onMouseOver={e => e.currentTarget.style.transform = "translateY(-4px)"}
+                onMouseOut={e => e.currentTarget.style.transform = "translateY(0)"}
+              >
+                <img src={nextDest.img} alt={nextDest.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                
+                {/* Internal Card Shadows */}
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.8) 100%)" }} />
+                
+                {/* Card Content Overlay */}
+                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: idx === 0 ? 24 : 20 }}>
+                  <div style={{ display: "flex", gap: 3, marginBottom: 8 }}>
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} style={{ color: "#fff", fontSize: 10 }}>★</span>
+                    ))}
+                  </div>
+                  <h4 style={{ 
+                    color: "#fff", 
+                    fontFamily: "'Montserrat', sans-serif", 
+                    fontSize: idx === 0 ? 15 : 13, 
+                    fontWeight: 700, 
+                    lineHeight: 1.4,
+                    margin: 0
+                  }}>
+                    {nextDest.tagline.split(" ")[0]} {nextDest.name},<br/>{nextDest.country}
+                  </h4>
+                </div>
 
-        <p style={{
-          fontFamily: "'Montserrat', sans-serif",
-          fontSize: "clamp(14px, 1.7vw, 18px)",
-          color: "rgba(255,255,255,0.75)",
-          maxWidth: 480,
-          lineHeight: 1.8,
-          opacity: fade ? 1 : 0,
-          transform: fade ? "translateY(0)" : "translateY(30px)",
-          transition: "opacity 0.6s ease, transform 0.6s ease",
-          transitionDelay: "0.35s",
-          marginBottom: 44,
-          letterSpacing: "0.01em",
-        }}>
-          {d.tagline}
-        </p>
-
-        {/* <button
-          onClick={() => navigate("/destinations")}
-          style={{
-            background: `linear-gradient(135deg, ${COLORS.secondary}, ${COLORS.secondaryLight})`,
-            color: "#fff", border: "none", padding: "16px 44px", borderRadius: 50,
-            fontFamily: "'Montserrat', sans-serif", fontSize: 13, fontWeight: 700,
-            letterSpacing: 3, textTransform: "uppercase", cursor: "pointer",
-            boxShadow: "0 10px 30px rgba(249,115,22,0.35)",
-            opacity: fade ? 1 : 0,
-            transform: fade ? "translateY(0)" : "translateY(30px)",
-            transition: "opacity 0.5s ease, transform 0.5s ease, background 0.3s, transform 0.3s",
-            transitionDelay: "0.45s",
-          }}
-          onMouseOver={e => { e.target.style.transform = "translateY(-3px)"; e.target.style.boxShadow = "0 15px 40px rgba(249,115,22,0.45)"; }}
-          onMouseOut={e => { e.target.style.transform = "translateY(0)"; e.target.style.boxShadow = "0 10px 30px rgba(249,115,22,0.35)"; }}
-        >
-          Start Planning
-        </button> */}
+                {/* Card Bookmark Badge */}
+                <div style={{ 
+                  position: "absolute", top: 16, right: 16, 
+                  background: "rgba(255,255,255,0.95)", width: 32, height: 32, borderRadius: "50%",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  boxShadow: "0 4px 10px rgba(0,0,0,0.15)"
+                }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill={COLORS.primaryLight} color={COLORS.primaryLight}>
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                  </svg>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
 
-      {/* Side navigation: vertical dots */}
-      <div className="hero-side-dots" style={{
-        position: "absolute", right: 40, top: "50%", transform: "translateY(-50%)",
-        display: "flex", flexDirection: "column", gap: 14, zIndex: 10,
-      }}>
-        {heroDestinations.map((dest, i) => (
-          <button key={i} onClick={() => goToSlide(i)} style={{
-            width: i === slide ? 14 : 10,
-            height: i === slide ? 14 : 10,
-            borderRadius: "50%",
-            background: i === slide ? COLORS.secondary : "rgba(255,255,255,0.5)",
-            border: i === slide ? `2px solid #fff` : "2px solid transparent",
-            cursor: "pointer",
-            transition: "all 0.3s",
-            boxShadow: i === slide ? "0 0 12px rgba(249,115,22,0.6)" : "none",
+      {/* Bottom Nav Arrows */}
+      <div style={{ position: "absolute", bottom: "6vh", left: 0, right: 0, padding: "0 8vw", display: "flex", justifyContent: "flex-end", alignItems: "center", zIndex: 5, paddingRight: "5vw" }}>
+        <div style={{ display: "flex", gap: 12 }}>
+          <button onClick={goToPrev} style={{
+            width: 48, height: 48, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.4)",
+            background: "rgba(255,255,255,0.05)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer", transition: "all 0.3s", backdropFilter: "blur(4px)"
           }}
-            title={dest.name}
-          />
-        ))}
+          onMouseOver={e => { e.currentTarget.style.background = "rgba(255,255,255,1)"; e.currentTarget.style.color = COLORS.dark; }}
+          onMouseOut={e => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "#fff"; }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button onClick={goToNext} style={{
+            width: 48, height: 48, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.4)",
+            background: "rgba(255,255,255,0.05)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer", transition: "all 0.3s", backdropFilter: "blur(4px)"
+          }}
+          onMouseOver={e => { e.currentTarget.style.background = "rgba(255,255,255,1)"; e.currentTarget.style.color = COLORS.dark; }}
+          onMouseOut={e => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "#fff"; }}>
+             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
       </div>
 
-
-
-      {/* Slide counter */}
-      <div className="hero-counter" style={{
-        position: "absolute", bottom: 24, left: "50%", transform: "translateX(-50%)",
-        fontFamily: "'Montserrat', sans-serif", fontSize: 12, letterSpacing: 3,
-        color: "rgba(255,255,255,0.5)", zIndex: 5,
+      {/* Scroll to Explore Indicator */}
+      <div style={{
+        position: "absolute", bottom: "3vh", left: "50%", transform: "translateX(-50%)",
+        display: "flex", flexDirection: "column", alignItems: "center", gap: 10, zIndex: 10,
+        opacity: fade ? 1 : 0, transition: "opacity 0.8s ease 0.5s"
       }}>
-        {String(slide + 1).padStart(2, "0")} / {String(heroDestinations.length).padStart(2, "0")}
+        <div style={{ fontSize: 10, fontFamily: "'Montserrat', sans-serif", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: 4 }}>
+          Scroll To Explore
+        </div>
+        <div style={{ width: 1, height: 40, background: "linear-gradient(to bottom, rgba(255,255,255,0.4), transparent)" }} />
       </div>
 
       <style>{`
-        @media(max-width: 768px) { .hero-dest-strip { display: none !important; } }
+        @media(max-width: 1024px) {
+          .hero-content {
+             flex-direction: column !important;
+             justify-content: center !important;
+          }
+        }
       `}</style>
     </section>
   );
@@ -1314,17 +1441,17 @@ function VisitUs() {
     <section className="visit-us" style={{ background: COLORS.bgAlt, padding: "80px 5vw", borderTop: "1px solid rgba(0,0,0,0.04)" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto" }}>
         <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 42, color: COLORS.dark, fontWeight: 700, marginBottom: 40, textAlign: "center" }}>Visit Us</h2>
-        
+
         {/* Map */}
         <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 8px 30px rgba(0,0,0,0.06)", marginBottom: 40 }}>
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.016335905188!2d72.90306176378419!3d19.085521251347078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7cb17df39fb%3A0x868b37e89e02c9ab!2sRaheja%20Plaza%201%2C%20Lal%20Bahadur%20Shastri%20Marg%2C%20Nityanand%20Nagar%2C%20Ghatkopar%20West%2C%20Mumbai%2C%20Maharashtra%20400086!5e0!3m2!1sen!2sin!4v1714154955523!5m2!1sen!2sin" 
-            width="100%" 
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.016335905188!2d72.90306176378419!3d19.085521251347078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7cb17df39fb%3A0x868b37e89e02c9ab!2sRaheja%20Plaza%201%2C%20Lal%20Bahadur%20Shastri%20Marg%2C%20Nityanand%20Nagar%2C%20Ghatkopar%20West%2C%20Mumbai%2C%20Maharashtra%20400086!5e0!3m2!1sen!2sin!4v1714154955523!5m2!1sen!2sin"
+            width="100%"
             height="300"
             className="visit-us-map"
-            style={{ border: 0, display: "block" }} 
-            allowFullScreen="" 
-            loading="lazy" 
+            style={{ border: 0, display: "block" }}
+            allowFullScreen=""
+            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
@@ -1335,8 +1462,8 @@ function VisitUs() {
             <div key={addr.city} className="address-card" style={{
               background: "#fff", padding: "28px 24px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.03)", transition: "all 0.3s ease", cursor: "pointer"
             }}
-             onMouseOver={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)"; }}
-             onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+              onMouseOver={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)"; }}
+              onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
             >
               <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
                 <MapPin size={22} color={COLORS.secondary} style={{ flexShrink: 0, marginTop: 2, opacity: 0.9 }} />
@@ -1602,7 +1729,7 @@ function HomePage() {
     <>
       <HeroDestinations />
       <div style={{ paddingTop: 40 }} />
-      <DestinationCarousel destinations={destinations} />
+      <DestinationCarousel destinations={heroDestinations} />
       <Stats />
       <DestinationGallery />
       <Experiences />

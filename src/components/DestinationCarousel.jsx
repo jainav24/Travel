@@ -20,8 +20,9 @@ export default function DestinationCarousel({ destinations }) {
     const [dragDeltaX, setDragDeltaX] = useState(0);
     const containerRef = useRef(null);
     const firstCardRef = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
 
-    const CARD_GAP = 24;
+    const OVERLAP = 120; // Exact pixel bridging between cards
 
     const [cardWidth, setCardWidth] = useState(300);
     useEffect(() => {
@@ -35,13 +36,16 @@ export default function DestinationCarousel({ destinations }) {
         return () => window.removeEventListener("resize", measure);
     }, []);
 
-    const STEP = cardWidth + CARD_GAP;
+    const STEP = cardWidth - OVERLAP;
 
-    const prev = useCallback(() => setActiveIndex((i) => Math.max(0, i - 1)), []);
-    const next = useCallback(
-        () => setActiveIndex((i) => Math.min(destinations.length - 1, i + 1)),
-        [destinations.length]
-    );
+    const prev = useCallback(() => setActiveIndex((i) => (i - 1 + destinations.length) % destinations.length), [destinations.length]);
+    const next = useCallback(() => setActiveIndex((i) => (i + 1) % destinations.length), [destinations.length]);
+
+    useEffect(() => {
+        if (isDragging || isHovered) return;
+        const interval = setInterval(() => next(), 3000);
+        return () => clearInterval(interval);
+    }, [isDragging, isHovered, next]);
 
     useEffect(() => {
         const handler = (e) => {
@@ -81,13 +85,13 @@ export default function DestinationCarousel({ destinations }) {
     const onTouchEnd = useCallback(() => {
         if (!isDragging) return;
         setIsDragging(false);
-        if (dragDeltaX < -STEP * 0.2) next();
-        else if (dragDeltaX > STEP * 0.2) prev();
+        if (dragDeltaX < -40) next();
+        else if (dragDeltaX > 40) prev();
         setDragDeltaX(0);
-    }, [isDragging, dragDeltaX, STEP, next, prev]);
+    }, [isDragging, dragDeltaX, next, prev]);
 
-    const translateX = isDragging ? -activeIndex * STEP + dragDeltaX : -activeIndex * STEP;
-    const paddingX = `calc(50vw - ${cardWidth / 2}px)`;
+    // Calculate a continuous floating index for smooth drag interpolation
+    const activeIndexFloat = activeIndex - (isDragging ? dragDeltaX / 200 : 0);
 
     return (
         <section
@@ -122,10 +126,12 @@ export default function DestinationCarousel({ destinations }) {
             <div
                 ref={containerRef}
                 className="relative w-full overflow-hidden"
+                style={{ perspective: 1400 }}
                 onMouseDown={onMouseDown}
                 onMouseMove={onMouseMove}
                 onMouseUp={onMouseUp}
-                onMouseLeave={onMouseUp}
+                onMouseLeave={(e) => { setIsHovered(false); onMouseUp(e); }}
+                onMouseEnter={() => setIsHovered(true)}
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
@@ -143,15 +149,12 @@ export default function DestinationCarousel({ destinations }) {
                 {/* Left arrow */}
                 <button
                     onClick={(e) => { e.stopPropagation(); prev(); }}
-                    disabled={activeIndex === 0}
                     className="absolute left-[4vw] top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all duration-300"
                     style={{
                         border: `1px solid ${COLORS.bgAlt2}`,
                         background: "rgba(255,255,255,0.85)",
                         backdropFilter: "blur(12px)",
-                        color: activeIndex === 0 ? COLORS.bgAlt2 : COLORS.primary,
-                        opacity: activeIndex === 0 ? 0 : 1,
-                        pointerEvents: activeIndex === 0 ? "none" : "auto",
+                        color: COLORS.primary,
                         boxShadow: "4px 4px 12px rgba(0,0,0,0.06), -2px -2px 8px rgba(255,255,255,0.8)",
                     }}
                     onMouseEnter={(e) => {
@@ -169,15 +172,12 @@ export default function DestinationCarousel({ destinations }) {
                 {/* Right arrow */}
                 <button
                     onClick={(e) => { e.stopPropagation(); next(); }}
-                    disabled={activeIndex === destinations.length - 1}
                     className="absolute right-[4vw] top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all duration-300"
                     style={{
                         border: `1px solid ${COLORS.bgAlt2}`,
                         background: "rgba(255,255,255,0.85)",
                         backdropFilter: "blur(12px)",
-                        color: activeIndex === destinations.length - 1 ? COLORS.bgAlt2 : COLORS.primary,
-                        opacity: activeIndex === destinations.length - 1 ? 0 : 1,
-                        pointerEvents: activeIndex === destinations.length - 1 ? "none" : "auto",
+                        color: COLORS.primary,
                         boxShadow: "4px 4px 12px rgba(0,0,0,0.06), -2px -2px 8px rgba(255,255,255,0.8)",
                     }}
                     onMouseEnter={(e) => {
@@ -192,37 +192,34 @@ export default function DestinationCarousel({ destinations }) {
                     →
                 </button>
 
-                <motion.div
-                    className="flex items-center"
-                    style={{
-                        gap: CARD_GAP,
-                        paddingLeft: paddingX,
-                        paddingRight: paddingX,
-                        paddingTop: 28,
-                        paddingBottom: 28,
-                        cursor: isDragging ? "grabbing" : "grab",
-                        position: "relative",
-                        zIndex: 10,
-                    }}
-                    animate={{ x: translateX }}
-                    transition={
-                        isDragging
-                            ? { duration: 0 }
-                            : { type: "spring", stiffness: 280, damping: 32 }
-                    }
+                <div
+                    className="relative w-full h-[540px] flex justify-center items-center"
+                    style={{ perspective: 1600 }}
+                    onMouseDown={onMouseDown}
+                    onMouseMove={onMouseMove}
+                    onMouseUp={onMouseUp}
+                    onMouseLeave={(e) => { setIsHovered(false); onMouseUp(e); }}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onTouchStart={onTouchStart}
+                    onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
                 >
-                    {destinations.map((dest, i) => (
-                        <div
-                            key={dest.slug}
-                            ref={i === 0 ? firstCardRef : null}
-                        >
+                    {destinations.map((dest, i) => {
+                        let rawOffset = i - activeIndexFloat;
+                        // For seamless visual wrapping, if offset is way off, wrap it to the closest circle arc
+                        if (rawOffset > destinations.length / 2) rawOffset -= destinations.length;
+                        if (rawOffset < -destinations.length / 2) rawOffset += destinations.length;
+
+                        return (
                             <DestinationCard
+                                key={dest.slug}
                                 destination={dest}
-                                offset={i - activeIndex}
+                                offset={rawOffset}
+                                isDragging={isDragging}
                             />
-                        </div>
-                    ))}
-                </motion.div>
+                        );
+                    })}
+                </div>
             </div>
 
             {/* Controls row */}
@@ -234,11 +231,12 @@ export default function DestinationCarousel({ destinations }) {
                             onClick={() => setActiveIndex(i)}
                             className="rounded-full transition-all duration-300"
                             style={{
-                                width: i === activeIndex ? 28 : 8,
-                                height: 8,
+                                width: 10,
+                                height: 10,
                                 background: i === activeIndex ? COLORS.primary : COLORS.bgAlt2,
                                 border: "none",
                                 padding: 0,
+                                transform: i === activeIndex ? "scale(1.2)" : "scale(1)",
                             }}
                         />
                     ))}

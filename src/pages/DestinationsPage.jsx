@@ -17,6 +17,35 @@ const COLORS = {
 
 const CATEGORIES = ["All", "Adventure", "Beach", "Culture", "Luxury", "Romance"];
 
+const DESTINATION_FLAGS_SVG = {
+    "Almaty": ["kz"],
+    "Australia": ["au"],
+    "Netherland": ["nl"],
+    "Netherlands": ["nl"],
+    "Bali": ["id"],
+    "Dubai": ["ae"],
+    "United Arab Emirates": ["ae"],
+    "Greece": ["gr"],
+    "Hong Kong": ["hk"],
+    "Italy": ["it"],
+    "Japan": ["jp"],
+    "Malaysia": ["my"],
+    "Mauritius": ["mu"],
+    "Maldives": ["mv"],
+    "Northern lights": ["fi", "no", "is"],
+    "Northern Lights": ["fi", "no", "is"],
+    "France": ["fr"],
+    "Singapore": ["sg"],
+    "South Africa": ["za"],
+    "Spain": ["es"],
+    "Switzerland": ["ch"],
+    "Thailand": ["th"],
+    "Turkey": ["tr"],
+    "United Kingdom": ["gb"],
+    "United States of America": ["us"],
+    "Vietnam": ["vn"]
+};
+
 const DestinationGridCard = ({ dest, index, visible }) => {
     const navigate = useNavigate();
     const [hovered, setHovered] = useState(false);
@@ -91,11 +120,31 @@ const DestinationGridCard = ({ dest, index, visible }) => {
                         margin: "0 0 6px 0",
                         letterSpacing: "0.02em",
                         lineHeight: 1.1,
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "nowrap"
                     }}
                 >
                     {dest.name}
+                    {DESTINATION_FLAGS_SVG[dest.name] && DESTINATION_FLAGS_SVG[dest.name].map((code, idx) => (
+                        <img 
+                            key={code}
+                            src={`https://flagcdn.com/${code}.svg`} 
+                            alt={`${dest.name} flag`} 
+                            style={{ 
+                                width: DESTINATION_FLAGS_SVG[dest.name].length > 1 ? "18px" : "24px", 
+                                height: "auto", 
+                                borderRadius: "2px", 
+                                opacity: 0.95,
+                                marginLeft: idx === 0 ? "8px" : "4px",
+                                display: "block",
+                                boxSizing: "border-box",
+                                boxShadow: "0 1px 3px rgba(0,0,0,0.3)"
+                            }} 
+                        />
+                    ))}
                 </h3>
-                
+
                 <div
                     style={{
                         fontFamily: "'Montserrat', sans-serif",
@@ -124,6 +173,9 @@ const DestinationGridCard = ({ dest, index, visible }) => {
                         flex-direction: column !important;
                         align-items: center !important;
                     }
+                    .dest-grid-card-content h3 img {
+                        width: 18px !important;
+                    }
                 }
             `}</style>
         </div>
@@ -151,7 +203,7 @@ export default function DestinationsPage() {
 
     return (
         <div style={{ background: COLORS.bg, color: COLORS.dark, minHeight: "100vh", paddingBottom: 100 }}>
-            
+
             {/* ── HERO ── */}
             <section style={{ position: "relative", height: "55vh", minHeight: 460, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 60 }}>
                 <img
@@ -160,14 +212,14 @@ export default function DestinationsPage() {
                     style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
                 />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }} />
-                
+
                 <div style={{ position: relative, zIndex: 2, textAlign: "center", padding: "0 20px" }} className="destinations-hero-content">
-                    <div style={{ 
-                        fontSize: 12, 
-                        letterSpacing: 6, 
-                        color: COLORS.secondary, 
-                        fontWeight: 700, 
-                        textTransform: "uppercase", 
+                    <div style={{
+                        fontSize: 12,
+                        letterSpacing: 6,
+                        color: COLORS.secondary,
+                        fontWeight: 700,
+                        textTransform: "uppercase",
                         marginBottom: 16,
                         opacity: visible ? 1 : 0,
                         transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -175,12 +227,12 @@ export default function DestinationsPage() {
                     }}>
                         ✦ Wanderlust ✦
                     </div>
-                    <h1 style={{ 
-                        fontFamily: "'Cormorant Garamond', serif", 
-                        fontSize: "clamp(48px, 6vw, 72px)", 
-                        fontWeight: 700, 
-                        lineHeight: 1.1, 
-                        marginBottom: 16, 
+                    <h1 style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: "clamp(48px, 6vw, 72px)",
+                        fontWeight: 700,
+                        lineHeight: 1.1,
+                        marginBottom: 16,
                         color: "#fff",
                         opacity: visible ? 1 : 0,
                         transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -193,26 +245,26 @@ export default function DestinationsPage() {
 
             {/* ── FILTERS ── */}
             <section style={{ maxWidth: 1400, margin: "0 auto", padding: "0 5vw", marginBottom: 60 }}>
-                <div style={{ 
-                    display: "flex", 
-                    flexDirection: "column", 
-                    gap: 32, 
+                <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 32,
                     alignItems: "center",
                     opacity: visible ? 1 : 0,
                     transition: "all 0.6s ease 0.3s"
                 }}>
                     {/* Search Bar - Non-functional for now as per user request to keep UI-focused, but implemented functional search for better UX */}
-                    <div style={{ 
-                        position: "relative", 
-                        width: "100%", 
+                    <div style={{
+                        position: "relative",
+                        width: "100%",
                         maxWidth: 500,
                     }} className="dest-search-bar">
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             placeholder="Find your dream destination..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            style={{ 
+                            style={{
                                 width: "100%",
                                 padding: "16px 24px 16px 56px",
                                 borderRadius: 50,
@@ -231,17 +283,17 @@ export default function DestinationsPage() {
                     </div>
 
                     {/* Category Tags */}
-                    <div style={{ 
-                        display: "flex", 
-                        gap: 12, 
-                        flexWrap: "wrap", 
+                    <div style={{
+                        display: "flex",
+                        gap: 12,
+                        flexWrap: "wrap",
                         justifyContent: "center"
                     }}>
                         {CATEGORIES.map(cat => (
-                            <button 
+                            <button
                                 key={cat}
                                 onClick={() => setSelectedCategory(cat)}
-                                style={{ 
+                                style={{
                                     padding: "10px 24px",
                                     borderRadius: 50,
                                     border: selectedCategory === cat ? `2px solid ${COLORS.primary}` : "1px solid rgba(0,0,0,0.08)",
@@ -264,9 +316,9 @@ export default function DestinationsPage() {
 
             {/* ── GRID ── */}
             <section ref={gridRef} style={{ maxWidth: 1440, margin: "0 auto", padding: "0 20px" }}>
-                <div style={{ 
-                    display: "grid", 
-                    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", 
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
                     gap: "32px 24px",
                 }} className="destinations-grid">
                     {filteredDestinations.map((dest, i) => (
@@ -278,14 +330,14 @@ export default function DestinationsPage() {
                     <div style={{ textAlign: "center", padding: "100px 20px", color: COLORS.muted }}>
                         <div style={{ fontSize: 48, marginBottom: 20 }}>🔍</div>
                         <h3 style={{ fontFamily: "'Montserrat', sans-serif" }}>No destinations found matching your search.</h3>
-                        <button 
+                        <button
                             onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}
-                            style={{ 
-                                background: "none", 
-                                border: "none", 
-                                color: COLORS.primary, 
-                                fontWeight: 700, 
-                                textDecoration: "underline", 
+                            style={{
+                                background: "none",
+                                border: "none",
+                                color: COLORS.primary,
+                                fontWeight: 700,
+                                textDecoration: "underline",
                                 cursor: "pointer",
                                 marginTop: 10
                             }}

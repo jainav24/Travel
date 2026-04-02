@@ -36,6 +36,35 @@ const destinations = [
   { name: "Vietnam", country: "Vietnam" }
 ];
 
+const DESTINATION_FLAGS_SVG = {
+    "Almaty": ["kz"],
+    "Australia": ["au"],
+    "Netherland": ["nl"],
+    "Netherlands": ["nl"],
+    "Bali": ["id"],
+    "Dubai": ["ae"],
+    "United Arab Emirates": ["ae"],
+    "Greece": ["gr"],
+    "Hong Kong": ["hk"],
+    "Italy": ["it"],
+    "Japan": ["jp"],
+    "Malaysia": ["my"],
+    "Mauritius": ["mu"],
+    "Maldives": ["mv"],
+    "Northern lights": ["fi", "no", "is"],
+    "Northern Lights": ["fi", "no", "is"],
+    "France": ["fr"],
+    "Singapore": ["sg"],
+    "South Africa": ["za"],
+    "Spain": ["es"],
+    "Switzerland": ["ch"],
+    "Thailand": ["th"],
+    "Turkey": ["tr"],
+    "United Kingdom": ["gb"],
+    "United States of America": ["us"],
+    "Vietnam": ["vn"]
+};
+
 export default function DestinationList() {
   const navigate = useNavigate();
 
@@ -122,6 +151,9 @@ export default function DestinationList() {
           font-weight: 700;
           margin: 0 0 6px 0;
           line-height: 1.1;
+          display: flex;
+          align-items: center;
+          flex-wrap: nowrap;
         }
 
         .dest-explore {
@@ -202,7 +234,26 @@ export default function DestinationList() {
                 <img src={imgSrc} alt={item.name} className="dest-img" />
                 <div className="dest-overlay" />
                 <div className="dest-text-wrapper">
-                  <h3 className="dest-name">{item.name}</h3>
+                  <h3 className="dest-name">
+                    {item.name}
+                    {DESTINATION_FLAGS_SVG[item.name] && DESTINATION_FLAGS_SVG[item.name].map((code, idx) => (
+                        <img 
+                            key={code}
+                            src={`https://flagcdn.com/${code}.svg`} 
+                            alt={`${item.name} flag`} 
+                            style={{ 
+                                width: DESTINATION_FLAGS_SVG[item.name].length > 1 ? "18px" : "24px", 
+                                height: "auto", 
+                                borderRadius: "2px", 
+                                opacity: 0.95,
+                                marginLeft: idx === 0 ? "8px" : "4px",
+                                display: "block",
+                                boxSizing: "border-box",
+                                boxShadow: "0 1px 3px rgba(0,0,0,0.3)"
+                            }} 
+                        />
+                    ))}
+                  </h3>
                   <div className="dest-explore">
                     Explore <span className="dest-explore-arrow">&rarr;</span>
                   </div>

@@ -11,6 +11,35 @@ const COLORS = {
     muted: "#64748b",
 };
 
+const DESTINATION_FLAGS_SVG = {
+    "Almaty": ["kz"],
+    "Australia": ["au"],
+    "Netherland": ["nl"],
+    "Netherlands": ["nl"],
+    "Bali": ["id"],
+    "Dubai": ["ae"],
+    "United Arab Emirates": ["ae"],
+    "Greece": ["gr"],
+    "Hong Kong": ["hk"],
+    "Italy": ["it"],
+    "Japan": ["jp"],
+    "Malaysia": ["my"],
+    "Mauritius": ["mu"],
+    "Maldives": ["mv"],
+    "Northern lights": ["fi", "no", "is"],
+    "Northern Lights": ["fi", "no", "is"],
+    "France": ["fr"],
+    "Singapore": ["sg"],
+    "South Africa": ["za"],
+    "Spain": ["es"],
+    "Switzerland": ["ch"],
+    "Thailand": ["th"],
+    "Turkey": ["tr"],
+    "United Kingdom": ["gb"],
+    "United States of America": ["us"],
+    "Vietnam": ["vn"]
+};
+
 export default function DestinationCard({ destination, offset }) {
     const navigate = useNavigate();
     const absOffset = Math.abs(offset);
@@ -47,6 +76,9 @@ export default function DestinationCard({ destination, offset }) {
                         display: flex !important; 
                         flex-direction: column !important; 
                         align-items: center !important; 
+                    }
+                    .dest-card-content h3 img {
+                        width: 18px !important;
                     }
                     .destination-card-shell { border-radius: 20px !important; }
                 }
@@ -124,9 +156,29 @@ export default function DestinationCard({ destination, offset }) {
                             fontWeight: 700,
                             margin: "0 0 12px 0",
                             lineHeight: 1.1,
+                            display: "flex",
+                            alignItems: "center",
+                            flexWrap: "nowrap"
                         }}
                     >
                         {destination.name}
+                        {DESTINATION_FLAGS_SVG[destination.name] && DESTINATION_FLAGS_SVG[destination.name].map((code, idx) => (
+                            <img 
+                                key={code}
+                                src={`https://flagcdn.com/${code}.svg`} 
+                                alt={`${destination.name} flag`} 
+                                style={{ 
+                                    width: DESTINATION_FLAGS_SVG[destination.name].length > 1 ? "18px" : "24px", 
+                                    height: "auto", 
+                                    borderRadius: "2px", 
+                                    opacity: 0.95,
+                                    marginLeft: idx === 0 ? "8px" : "4px",
+                                    display: "block",
+                                    boxSizing: "border-box",
+                                    boxShadow: "0 1px 3px rgba(0,0,0,0.3)"
+                                }} 
+                            />
+                        ))}
                     </h3>
                     <div
                         style={{

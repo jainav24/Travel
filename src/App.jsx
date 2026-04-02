@@ -188,6 +188,35 @@ const priceRanges = [
   { label: "\u20B92L+", path: "/packages?price=above-2l" },
 ];
 
+const DESTINATION_FLAGS_SVG = {
+    "Almaty": ["kz"],
+    "Australia": ["au"],
+    "Netherland": ["nl"],
+    "Netherlands": ["nl"],
+    "Bali": ["id"],
+    "Dubai": ["ae"],
+    "United Arab Emirates": ["ae"],
+    "Greece": ["gr"],
+    "Hong Kong": ["hk"],
+    "Italy": ["it"],
+    "Japan": ["jp"],
+    "Malaysia": ["my"],
+    "Mauritius": ["mu"],
+    "Maldives": ["mv"],
+    "Northern lights": ["fi", "no", "is"],
+    "Northern Lights": ["fi", "no", "is"],
+    "France": ["fr"],
+    "Singapore": ["sg"],
+    "South Africa": ["za"],
+    "Spain": ["es"],
+    "Switzerland": ["ch"],
+    "Thailand": ["th"],
+    "Turkey": ["tr"],
+    "United Kingdom": ["gb"],
+    "United States of America": ["us"],
+    "Vietnam": ["vn"]
+};
+
 const NAV_DESTINATIONS = [
   { name: "Bali", country: "Indonesia", slug: "bali" },
   { name: "Dubai", country: "UAE", slug: "dubai" },
@@ -457,11 +486,18 @@ function Navbar() {
                         style={{
                           color: COLORS.dark, textDecoration: "none", fontSize: 14,
                           fontFamily: "'Montserrat', sans-serif", fontWeight: 500,
-                          transition: "all 0.2s", display: "block",
-                          padding: "4px 0"
+                          transition: "all 0.2s", display: "flex", justifyContent: "space-between", alignItems: "center",
+                          padding: "4px 0", gap: 8
                         }}
                       >
                         {item.name}
+                        {DESTINATION_FLAGS_SVG[item.name] && (
+                          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                            {DESTINATION_FLAGS_SVG[item.name].map(code => (
+                              <img key={code} src={`https://flagcdn.com/${code}.svg`} alt="" style={{ width: 14, height: "auto", opacity: 0.9, borderRadius: 2 }} className="nav-flag-svg" />
+                            ))}
+                          </div>
+                        )}
                       </Link>
                     ))}
                   </div>
@@ -513,21 +549,23 @@ function Navbar() {
               border: "1px solid rgba(0,0,0,0.04)",
             }}
           >
+            <div style={{ textAlign: "center", marginBottom: 32 }}>
+              <h4 style={{
+                fontSize: 12, letterSpacing: 2, color: COLORS.primary, fontWeight: 700,
+                textTransform: "uppercase", margin: 0, opacity: 0.9
+              }}>
+                International Packages
+              </h4>
+            </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 0 }}>
               {[
-                { title: "Domestic Escapes", items: priceRanges.slice(0, 2) },
-                { title: "International Luxury", items: priceRanges.slice(2, 5) }
+                { items: priceRanges.slice(0, 3) },
+                { items: priceRanges.slice(3, 5) }
               ].map((col, idx) => (
                 <div key={idx} style={{
                   padding: "0 40px",
                   borderRight: idx < 1 ? "1px solid rgba(0,0,0,0.06)" : "none"
                 }}>
-                  <h4 style={{
-                    fontSize: 10, letterSpacing: 2, color: COLORS.muted, fontWeight: 700,
-                    textTransform: "uppercase", marginBottom: 24, opacity: 0.8
-                  }}>
-                    {col.title}
-                  </h4>
                   <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                     {col.items.map((pr) => (
                       <Link
@@ -590,8 +628,17 @@ function Navbar() {
                       {group.items.map(d => (
                         <Link key={d.slug} to={`/destination/${d.slug}`}
                           onClick={() => setMenuOpen(false)}
-                          style={{ color: COLORS.dark, fontSize: 14, textDecoration: "none", fontFamily: "'Montserrat', sans-serif", fontWeight: 500 }}
-                        >{d.name}</Link>
+                          style={{ color: COLORS.dark, fontSize: 14, textDecoration: "none", fontFamily: "'Montserrat', sans-serif", fontWeight: 500, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}
+                        >
+                          {d.name}
+                          {DESTINATION_FLAGS_SVG[d.name] && (
+                            <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                              {DESTINATION_FLAGS_SVG[d.name].map(code => (
+                                <img key={code} src={`https://flagcdn.com/${code}.svg`} alt="" style={{ width: 12, height: "auto", opacity: 0.9, borderRadius: 2 }} />
+                              ))}
+                            </div>
+                          )}
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -727,7 +774,9 @@ function Navbar() {
           background: rgba(249,115,22,0.03);
           border-radius: 6px;
           padding-left: 8px !important;
+          padding-right: 8px !important;
         }
+        .mega-nav-link-premium:hover .nav-flag-svg { opacity: 1 !important; }
         .view-all-link-premium:hover { transform: translateX(8px); opacity: 0.8; }
       `}</style>
 
@@ -1243,6 +1292,72 @@ function ContactSection() {
   );
 }
 
+// ─── VISIT US ─────────────────────────────────────────────────────────────
+
+function VisitUs() {
+  const addresses = [
+    {
+      city: "Mumbai",
+      text: "501/502 - Catch a Trip, Let's Work,\nRaheja Plaza - Tower A,\nLal Bahadur Shastri Marg,\nNityanand Nagar,\nGhatkopar West, Mumbai,\nMaharashtra - 400086"
+    },
+    {
+      city: "Delhi",
+      text: "Catch a Trip, 2nd floor,\nWeWork Eldeco Centre,\nBlock A, Shivalik Colony,\nMalviya Nagar,\nNew Delhi, Delhi 110017"
+    },
+    {
+      city: "Kalyan",
+      text: "Catch a Trip,\nB - 101, Varsha Park,\nVayle Nagar, Khadakpada,\nKalyan West,\n421210, Maharashtra, India"
+    }
+  ];
+
+  return (
+    <section className="visit-us" style={{ background: COLORS.bgAlt, padding: "80px 5vw", borderTop: "1px solid rgba(0,0,0,0.04)" }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+        <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 42, color: COLORS.dark, fontWeight: 700, marginBottom: 40, textAlign: "center" }}>Visit Us</h2>
+        
+        {/* Map */}
+        <div style={{ borderRadius: 16, overflow: "hidden", boxShadow: "0 8px 30px rgba(0,0,0,0.06)", marginBottom: 40 }}>
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15082.016335905188!2d72.90306176378419!3d19.085521251347078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7cb17df39fb%3A0x868b37e89e02c9ab!2sRaheja%20Plaza%201%2C%20Lal%20Bahadur%20Shastri%20Marg%2C%20Nityanand%20Nagar%2C%20Ghatkopar%20West%2C%20Mumbai%2C%20Maharashtra%20400086!5e0!3m2!1sen!2sin!4v1714154955523!5m2!1sen!2sin" 
+            width="100%" 
+            height="300"
+            className="visit-us-map"
+            style={{ border: 0, display: "block" }} 
+            allowFullScreen="" 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
+        {/* Address Grid */}
+        <div className="address-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          {addresses.map(addr => (
+            <div key={addr.city} className="address-card" style={{
+              background: "#fff", padding: "28px 24px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.03)", transition: "all 0.3s ease", cursor: "pointer"
+            }}
+             onMouseOver={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)"; }}
+             onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+            >
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
+                <MapPin size={22} color={COLORS.secondary} style={{ flexShrink: 0, marginTop: 2, opacity: 0.9 }} />
+                <div>
+                  <h4 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 16, fontWeight: 700, color: COLORS.dark, marginBottom: 12 }}>{addr.city}</h4>
+                  <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: COLORS.muted, lineHeight: 1.6, whiteSpace: "pre-line" }}>
+                    {addr.text}
+                  </p>
+                  <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr.text.replace(/\n/g, ' '))}`} target="_blank" rel="noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 16, fontSize: 12, color: COLORS.primaryLight, textDecoration: "none", fontWeight: 600, fontFamily: "'Montserrat', sans-serif", transition: "opacity 0.2s" }} onMouseOver={e => e.currentTarget.style.opacity = 0.7} onMouseOut={e => e.currentTarget.style.opacity = 1}>
+                    Open in Google Maps <span>&rarr;</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
 
 function Footer() {
@@ -1267,11 +1382,19 @@ function Footer() {
   return (
     <footer style={{ background: "#0f172a", borderTop: "none", padding: "70px 5vw 30px" }}>
       <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr 1fr", gap: 40, marginBottom: 50, alignItems: "start" }}>
-        {/* Left: Logo only */}
-        <div className="footer-logo-col" style={{ display: "flex", alignItems: "flex-start" }}>
+        {/* Left: Logo & Brand Name */}
+        <div className="footer-logo-col" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 16 }}>
           <Link to="/">
             <img src={whiteLogo} alt="We Plan Trips" className="footer-logo" />
           </Link>
+          <div style={{ paddingLeft: 8 }}>
+            <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 800, fontSize: 20, letterSpacing: 4, color: "#fff", margin: "0 0 6px 0" }}>
+              WEPLANTRIPS
+            </h3>
+            <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: "rgba(255,255,255,0.45)", letterSpacing: 2, textTransform: "uppercase" }}>
+              Curating Premium Escapes
+            </div>
+          </div>
         </div>
 
         {/* Center: Destinations */}
@@ -1713,6 +1836,10 @@ export default function App() {
           /* Contact */
           .contact-card { padding: 28px 20px !important; }
 
+          /* Visit Us Map & Addresses */
+          .visit-us-map { height: 220px !important; }
+          .address-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+
           /* Footer */
           .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
           .footer-logo-col { justify-content: center !important; }
@@ -1739,12 +1866,18 @@ export default function App() {
           .experiences-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
           .footer-dest-grid { grid-template-columns: 1fr !important; }
         }
+        
+        @media(min-width: 769px) and (max-width: 1024px) {
+          .address-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+
         .footer-logo { height: 70px !important; width: auto; max-width: 200px; object-fit: contain; }
       `}</style>
       {showLoader && <SplashLoader onFinish={() => setShowLoader(false)} />}
       <Navbar />
       <LeadOverlay />
       <AppRoutes />
+      <VisitUs />
       <Footer />
     </>
   );

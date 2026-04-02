@@ -75,7 +75,7 @@ export default function DestinationPage() {
                 />
 
                 {/* Back button */}
-                <button
+                {/* <button
                     onClick={() => navigate("/")}
                     className="absolute top-24 z-10 flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-[12px] font-semibold tracking-widest uppercase transition-all"
                     style={{
@@ -95,7 +95,7 @@ export default function DestinationPage() {
                     }}
                 >
                     ← Back
-                </button>
+                </button> */}
 
                 {/* Hero text */}
                 <div className="absolute bottom-[10%] left-0 right-0 px-[5vw] flex flex-col hero-text-container" style={{ alignItems: "flex-start" }}>
@@ -111,7 +111,7 @@ export default function DestinationPage() {
                     >
                         {destination.name}
                     </h1>
-                    <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+                    {/* <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
                         <div
                             className="inline-flex items-center px-5 py-2 rounded-full text-sm font-semibold"
                             style={{
@@ -129,7 +129,7 @@ export default function DestinationPage() {
                         >
                             Scroll to explore ↓
                         </span>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Floating Info Card */}
@@ -227,7 +227,7 @@ export default function DestinationPage() {
                     alignItems: "stretch"
                 }}>
                     {destination.packages.map((pkg, i) => (
-                        <PackageCard key={pkg.title} pkg={pkg} index={i} destinationSlug={destination.slug} listingImage={destination.cardImg} />
+                        <PackageCard key={pkg.title} pkg={pkg} index={i} destinationSlug={destination.slug} listingImage={pkg.listingImage || destination.cardImg} />
                     ))}
                 </div>
             </div>

@@ -70,7 +70,7 @@ export default function FilteredPackagesPage() {
             ...pkg,
             destinationSlug: dest.slug,
             destinationName: dest.name,
-            listingImage: dest.cardImg,
+            listingImage: pkg.listingImage || dest.cardImg,
             destTag: dest.tag || "",
           });
         }

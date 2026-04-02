@@ -16,7 +16,7 @@ import FilteredPackagesPage from "./pages/FilteredPackagesPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import destinations from "./data/destinations";
-import { destinationImages } from "./data/stockImages";
+import stockImages, { destinationImages, whyChooseImages, galleryImages } from "./data/stockImages";
 
 // ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
 
@@ -824,7 +824,7 @@ function HeroDestinations() {
           {d.tagline}
         </p>
 
-        <button
+        {/* <button
           onClick={() => navigate("/destinations")}
           style={{
             background: `linear-gradient(135deg, ${COLORS.secondary}, ${COLORS.secondaryLight})`,
@@ -841,7 +841,7 @@ function HeroDestinations() {
           onMouseOut={e => { e.target.style.transform = "translateY(0)"; e.target.style.boxShadow = "0 10px 30px rgba(249,115,22,0.35)"; }}
         >
           Start Planning
-        </button>
+        </button> */}
       </div>
 
       {/* Side navigation: vertical dots */}
@@ -900,15 +900,15 @@ function SectionTitle({ tag, title, sub }) {
 // ─── DESTINATION GALLERY (Scrollable Mosaic) ─────────────────────────────────
 
 const galleryDestinations = [
-  { name: "Bali", slug: "bali", tag: "Romance", img: destinationImages["Bali"] },
-  { name: "Dubai", slug: "dubai", tag: "Luxury", img: destinationImages["Dubai"] },
-  { name: "Northern Lights", slug: "northern-lights", tag: "Magical", img: destinationImages["Northern Lights"] },
-  { name: "Japan", slug: "japan", tag: "Culture", img: destinationImages["Japan"] },
-  { name: "Greece", slug: "greece", tag: "History", img: destinationImages["Greece"] },
-  { name: "Singapore", slug: "singapore", tag: "Modern", img: destinationImages["Singapore"] },
-  { name: "Mauritius", slug: "mauritius", tag: "Beach", img: destinationImages["Mauritius"] },
-  { name: "Hong Kong", slug: "hong-kong", tag: "City", img: destinationImages["Hong Kong"] },
-  { name: "Almaty", slug: "almaty", tag: "Adventure", img: destinationImages["Almaty"] },
+  { name: "Bali", slug: "bali", tag: "Romance", img: galleryImages.bali },
+  { name: "Dubai", slug: "dubai", tag: "Luxury", img: galleryImages.dubai },
+  { name: "Northern Lights", slug: "northern-lights", tag: "Magical", img: galleryImages.northernLights },
+  { name: "Japan", slug: "japan", tag: "Culture", img: galleryImages.japan },
+  { name: "Greece", slug: "greece", tag: "History", img: galleryImages.greece },
+  { name: "Singapore", slug: "singapore", tag: "Modern", img: galleryImages.singapore },
+  { name: "Mauritius", slug: "mauritius", tag: "Beach", img: galleryImages.mauritius },
+  { name: "Hong Kong", slug: "hong-kong", tag: "City", img: galleryImages.hongkong },
+  { name: "Almaty", slug: "almaty", tag: "Adventure", img: galleryImages.almaty },
 ];
 
 function DestinationGallery() {
@@ -1020,10 +1020,10 @@ function ExperienceCard({ item, index, visible }) {
 function Experiences() {
   const [ref, visible] = useScrollAnimation();
   const items = [
-    { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><path d="M9 15l2 2 4-4" /></svg>, title: "Special Activities", desc: "Snorkeling, hiking, skydiving — we book the extraordinary experiences you'll remember forever.", img: destinationImages["Bali"] },
-    { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" /><line x1="9" y1="3" x2="9" y2="18" /><line x1="15" y1="6" x2="15" y2="21" /></svg>, title: "Private Travel Planning", desc: "Bespoke itineraries crafted around your every preference by expert travel designers.", img: destinationImages["Dubai"] },
-    { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>, title: "Luxury Tours", desc: "Curated stays at the world's finest hotels, resorts, and hidden boutique retreats.", img: destinationImages["Greece"] },
-    { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><line x1="2" y1="12" x2="22" y2="12" /></svg>, title: "Best Destinations", desc: "Expertly vetted bucket-list destinations across 40+ countries, handpicked for you.", img: destinationImages["Japan"] },
+    { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><path d="M9 15l2 2 4-4" /></svg>, title: "Special Activities", desc: "Snorkeling, hiking, skydiving — we book the extraordinary experiences you'll remember forever.", img: whyChooseImages.specialActivities },
+    { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" /><line x1="9" y1="3" x2="9" y2="18" /><line x1="15" y1="6" x2="15" y2="21" /></svg>, title: "Private Travel Planning", desc: "Bespoke itineraries crafted around your every preference by expert travel designers.", img: whyChooseImages.privateTravelPlanning },
+    { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>, title: "Luxury Tours", desc: "Curated stays at the world's finest hotels, resorts, and hidden boutique retreats.", img: whyChooseImages.luxuryTours },
+    { icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><line x1="2" y1="12" x2="22" y2="12" /></svg>, title: "Best Destinations", desc: "Expertly vetted bucket-list destinations across 40+ countries, handpicked for you.", img: whyChooseImages.bestDestinations },
   ];
   return (
     <section ref={ref} id="tours" style={{ background: COLORS.bgAlt, padding: "90px 5vw" }}>
